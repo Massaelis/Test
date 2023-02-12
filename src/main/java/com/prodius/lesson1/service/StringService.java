@@ -1,4 +1,4 @@
-package com.prodius.lesson1.array.service;
+package com.prodius.lesson1.service;
 
 import java.util.Arrays;
 import java.util.Random;

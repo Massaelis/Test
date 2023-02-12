@@ -1,4 +1,4 @@
-package com.prodius.lesson1.array;
+package com.prodius.lesson1;
 
 import java.util.Scanner;
 

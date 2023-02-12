@@ -1,4 +1,4 @@
-package com.prodius.lesson1.array.util;
+package com.prodius.lesson1.util;
 
 import lombok.SneakyThrows;
 

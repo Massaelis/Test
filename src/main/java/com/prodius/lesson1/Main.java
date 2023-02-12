@@ -1,7 +1,7 @@
-package com.prodius.lesson1.array;
+package com.prodius.lesson1;
 
-import com.prodius.lesson1.array.service.StringService;
-import com.prodius.lesson1.array.util.StringInputUtil;
+import com.prodius.lesson1.service.StringService;
+import com.prodius.lesson1.util.StringInputUtil;
 
 public class Main {
     public static void main(String[] args) {
