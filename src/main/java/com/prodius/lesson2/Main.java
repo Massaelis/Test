@@ -7,7 +7,8 @@ public class Main {
        final StringUtil stringUtil = new StringUtil();
        final int line = StringUtil.getUserString();
        final String newLine = stringUtil.getRandomString(line);
-       final String changeCharacters = stringUtil.changeCharacters(newLine);
+       final char[] addChar = stringUtil.addCharacters(newLine);
+       final String changeCharacters = stringUtil.changeCharacters(String.valueOf(addChar));
        final int stringLength =  stringUtil.stringCheck(changeCharacters);
     }
 }

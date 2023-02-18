@@ -76,4 +76,24 @@ public class StringUtil {
 
         stringCheck(String.valueOf(result));
     }
+    public char[] addCharacters(final String line) {
+        final char[] chars = line.toCharArray();
+        final int delta = chars.length % 2 == 0 ? chars.length / 2 : chars.length / 2 + 1;
+        final char[] chars1 = new char[chars.length + delta];
+        for (int i = 0, y = 0; i < chars.length; i++) {
+            if (i % 2 == 0) {
+                chars1[y] = chars[i];
+                chars1[y + 1] = chars[i];
+                y += 2;
+            } else {
+                chars1[y] = chars[i];
+                y += 1;
+            }
+        }
+        System.out.print("String before adding characters: ");
+        System.out.println(chars);
+        System.out.print("String after adding characters: ");
+        System.out.println(chars1);
+        return chars1;
+    }
 }
