@@ -32,26 +32,26 @@ public class Calculator { // ctrl+shift+t create a test
         return a * 1.0 / b;
     }
 
-    // TODO: 24/02/23
-    //  логарифм, корень, степень, перевод в дробь
-    public int log(final int a,final int b)
-    {
-        return (int) (Math.log(a) / Math.log(b));
+
+    public double log(final int a, final int b) {
+        return Math.log(a) / Math.log(b);
     }
 
     public int rooting(final int a) {
-        //int root = (int) Math.sqrt(a * a);
-        if (a < 2) return a;
+        if (a < 2) {
+            return a;
+        }
         int i = 1;
-        while (i * i <= a){
-            if(i * i <= 0) break;
+        while (i * i <= a) {
+            if (i * i <= 0) {
+                break;
+            }
             i++;
         }
         return --i;
     }
 
-    public int exponentiation(final int a, final int b){
-        //for (int) Math.pow(a, b);
+    public int exponentiation(final int a, final int b) {
         int result = 1;
         for (int i = 1; i <= b; i++) {
             result = result * a;
@@ -60,8 +60,7 @@ public class Calculator { // ctrl+shift+t create a test
     }
 
     public String conversionInFraction(final int a, final int b) {
-       int topPart = a * b;
-       String rootString = topPart + "/" + b;
-       return rootString;
+        int topPart = a * b;
+        return topPart + "/" + b;
     }
 }

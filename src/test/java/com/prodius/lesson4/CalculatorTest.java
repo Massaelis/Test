@@ -255,10 +255,9 @@ class CalculatorTest {
         void logPositive() {
             int a = 1;
             int b = 1;
-            int expected = (int) (Math.log(a) / Math.log(b));
+            double expected = (Math.log(a) / Math.log(b));
 
-
-            final int actualLog = target.log(a, b);
+            final double actualLog = target.log(a, b);
 
             Assertions.assertEquals(expected, actualLog);
         }
@@ -267,9 +266,9 @@ class CalculatorTest {
         void logNegative() {
             int a = -1;
             int b = -1;
-            int expected = (int) (Math.log(a) / Math.log(b));
+            double expected = Math.log(a) / Math.log(b);
 
-            final int actualLog = target.log(a, b);
+            final double actualLog = target.log(a, b);
 
 
             Assertions.assertEquals(expected, actualLog);
@@ -279,9 +278,9 @@ class CalculatorTest {
         void logZero() {
             int a = 0;
             int b = 0;
-            int expected = (int) (Math.log(a) / Math.log(b));
+            double expected = Math.log(a) / Math.log(b);
 
-            final int actualLog = target.log(a, b);
+            final double actualLog = target.log(a, b);
 
             Assertions.assertEquals(expected, actualLog);
         }
@@ -290,9 +289,9 @@ class CalculatorTest {
         void logDifferent() {
             int a = -5;
             int b = 10;
-            int expected = (int) (Math.log(a) / Math.log(b));
+            double expected = Math.log(a) / Math.log(b);
 
-            final int actualLog = target.log(a, b);
+            final double actualLog = target.log(a, b);
 
             Assertions.assertEquals(expected, actualLog);
         }
@@ -313,7 +312,16 @@ class CalculatorTest {
         @Test
         void rootingNegative() {
             int a = -1;
-            int expected = (int) Math.sqrt(a * a);
+
+            final int actualRooting = target.rooting(a);
+
+            Assertions.assertEquals(a, actualRooting);
+        }
+
+        @Test
+        void rootingZero() {
+            int a = 0;
+            int expected = 0;
 
             final int actualRooting = target.rooting(a);
 
@@ -321,10 +329,9 @@ class CalculatorTest {
         }
 
         @Test
-        void rootingZero() {
-            int a = 0;
-            int i = 1;
-            int expected = --i;
+        void rootingBiggerThenOne() {
+            int a = 10;
+            int expected = 3;
 
             final int actualRooting = target.rooting(a);
 
@@ -351,7 +358,7 @@ class CalculatorTest {
         void exponentiationNegative() {
             int a = -1;
             int b = -1;
-            int expected = (int) Math.pow(a, b);
+            int expected = 1;
 
             final int actualExponentiation = target.exponentiation(a, b);
 
