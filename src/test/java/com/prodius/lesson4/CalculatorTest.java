@@ -248,4 +248,191 @@ class CalculatorTest {
             return a * 1.0 / b;
         }
     }
+
+    @Nested
+    class LogTest{
+        @Test
+        void logPositive() {
+            int a = 1;
+            int b = 1;
+            int expected = (int) (Math.log(a) / Math.log(b));
+
+
+            final int actualLog = target.log(a, b);
+
+            Assertions.assertEquals(expected, actualLog);
+        }
+
+        @Test
+        void logNegative() {
+            int a = -1;
+            int b = -1;
+            int expected = (int) (Math.log(a) / Math.log(b));
+
+            final int actualLog = target.log(a, b);
+
+
+            Assertions.assertEquals(expected, actualLog);
+        }
+
+        @Test
+        void logZero() {
+            int a = 0;
+            int b = 0;
+            int expected = (int) (Math.log(a) / Math.log(b));
+
+            final int actualLog = target.log(a, b);
+
+            Assertions.assertEquals(expected, actualLog);
+        }
+
+        @Test
+        void logDifferent() {
+            int a = -5;
+            int b = 10;
+            int expected = (int) (Math.log(a) / Math.log(b));
+
+            final int actualLog = target.log(a, b);
+
+            Assertions.assertEquals(expected, actualLog);
+        }
+    }
+
+    @Nested
+    class RootingTest{
+        @Test
+        void rootingPositive() {
+            int a = 1;
+            int expected = (int) Math.sqrt(a * a);
+
+            final int actualRooting = target.rooting(a);
+
+            Assertions.assertEquals(expected, actualRooting);
+        }
+
+        @Test
+        void rootingNegative() {
+            int a = -1;
+            int expected = (int) Math.sqrt(a * a);
+
+            final int actualRooting = target.rooting(a);
+
+            Assertions.assertEquals(expected, actualRooting);
+        }
+
+        @Test
+        void rootingZero() {
+            int a = 0;
+            int i = 1;
+            int expected = --i;
+
+            final int actualRooting = target.rooting(a);
+
+            Assertions.assertEquals(expected, actualRooting);
+        }
+
+    }
+
+    @Nested
+    class ExponentiationTest{
+        @Test
+        void exponentiationPositive() {
+            int a = 1;
+            int b = 1;
+            int expected = (int) Math.pow(a, b);
+
+
+            final int actualExponentiation = target.exponentiation(a, b);
+
+            Assertions.assertEquals(expected, actualExponentiation);
+        }
+
+        @Test
+        void exponentiationNegative() {
+            int a = -1;
+            int b = -1;
+            int expected = (int) Math.pow(a, b);
+
+            final int actualExponentiation = target.exponentiation(a, b);
+
+            Assertions.assertEquals(expected, actualExponentiation);
+        }
+
+        @Test
+        void exponentiationZero() {
+            int a = 0;
+            int b = 0;
+            int expected = (int) Math.pow(a, b);
+
+            final int actualExponentiation = target.exponentiation(a, b);
+
+            Assertions.assertEquals(expected, actualExponentiation);
+        }
+
+        @Test
+        void exponentiationDifferent() {
+            int a = -5;
+            int b = 10;
+            int expected = (int) Math.pow(a, b);
+
+            final int actualExponentiation = target.exponentiation(a, b);
+
+            Assertions.assertEquals(expected, actualExponentiation);
+        }
+    }
+
+    @Nested
+    class ConversionInFractionTest{
+        @Test
+        void conversionInFractionPositive() {
+            int a = 1;
+            int b = 1;
+            int topPart = a * b;
+
+            String expected = topPart + "/" + b;
+
+            final String actualConversionInFraction = target.conversionInFraction(a, b);
+
+            Assertions.assertEquals(expected, actualConversionInFraction);
+        }
+
+        @Test
+        void conversionInFractionNegative() {
+            int a = -1;
+            int b = -1;
+            int topPart = a * b;
+
+            String expected = topPart + "/" + b;
+
+            final String actualConversionInFraction = target.conversionInFraction(a, b);
+
+            Assertions.assertEquals(expected, actualConversionInFraction);
+        }
+
+        @Test
+        void conversionInFractionZero() {
+            int a = 0;
+            int b = 0;
+            int topPart = 0;
+
+            String expected = topPart + "/" + b;
+
+            final String actualConversionInFraction = target.conversionInFraction(a, b);
+
+            Assertions.assertEquals(expected, actualConversionInFraction);
+        }
+
+        @Test
+        void conversionInFractionDifferent() {
+            int a = -5;
+            int b = 10;
+            int topPart = a * b;
+
+            String expected = topPart + "/" + b;
+
+            final String actualConversionInFraction = target.conversionInFraction(a, b);
+
+            Assertions.assertEquals(expected, actualConversionInFraction);
+        }
+    }
 }

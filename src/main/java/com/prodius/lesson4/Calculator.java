@@ -34,4 +34,34 @@ public class Calculator { // ctrl+shift+t create a test
 
     // TODO: 24/02/23
     //  логарифм, корень, степень, перевод в дробь
+    public int log(final int a,final int b)
+    {
+        return (int) (Math.log(a) / Math.log(b));
+    }
+
+    public int rooting(final int a) {
+        //int root = (int) Math.sqrt(a * a);
+        if (a < 2) return a;
+        int i = 1;
+        while (i * i <= a){
+            if(i * i <= 0) break;
+            i++;
+        }
+        return --i;
+    }
+
+    public int exponentiation(final int a, final int b){
+        //for (int) Math.pow(a, b);
+        int result = 1;
+        for (int i = 1; i <= b; i++) {
+            result = result * a;
+        }
+        return result;
+    }
+
+    public String conversionInFraction(final int a, final int b) {
+       int topPart = a * b;
+       String rootString = topPart + "/" + b;
+       return rootString;
+    }
 }
