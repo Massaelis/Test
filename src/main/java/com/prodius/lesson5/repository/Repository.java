@@ -2,16 +2,27 @@ package com.prodius.lesson5.repository;
 
 import com.prodius.lesson5.message.Massage;
 
+import java.util.List;
+import java.util.Optional;
+
 public class Repository {
-    public static void save(Massage massage) {
+    public void save(final Massage massage) {
+
     }
-    public static String showMassage() {
+
+    public List<Massage> getAll() {
         return null;
     }
-    public static Object getAll() {
+
+    public List<Massage> getAll(final String sender) {
         return null;
     }
-    public static Object getAll(String sender) {
+
+    public Massage getById(final int id) {
         return null;
+    }
+
+    public Optional<Massage> getByMessage(final Massage massage) {
+        return Optional.empty();
     }
 }

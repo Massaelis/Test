@@ -2,49 +2,66 @@ package com.prodius.lesson5.service;
 
 import com.prodius.lesson5.message.Massage;
 import com.prodius.lesson5.repository.Repository;
-import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class Service {
-    Random random = new Random();
-    Massage massage = new Massage(RandomStringUtils.random(6), RandomStringUtils.random(6));
+    private final Repository repository;
+
+    private final Random random = new Random();
+
+    Service(final Repository repository) {
+        this.repository = repository;
+    }
 
     //1
-    public Massage checkOfEmpty(String sender, String receiver){
-        if(sender != ""){
-            if(receiver != ""){
-                Repository.save(massage);
-            }else{
-                System.out.println("You not write message to sender: " + new IllegalArgumentException());
-            }
-        } else {
-            System.out.println("You not write message to receiver: " + new IllegalArgumentException());
+    public void checkOfEmpty(final String sender, final String receiver) {
+        if (sender == null || receiver == null) {
+            throw new IllegalArgumentException();
         }
-        return massage;
+        final Massage massage = new Massage(receiver, sender);
+        repository.save(massage);
     }
 
     //2
-    public String checkMassage(int times){
-        for (int i = 0; i < times; i++){
-            Repository.showMassage();
+    public void checkMassage(final int times) {
+        for (int i = 0; i < times; i++) {
+            repository.getAll();
         }
-        return Repository.showMassage();
     }
 
     //3
-    public String checkSenderMassage(){
-        return (String) Repository.getAll(massage.sender);
+    public int checkSenderMassage(final String sender) {
+        final List<Massage> messages = repository.getAll(sender);
+        return messages.size();
     }
 
     //4
-    public Massage checkReceiverCharacter() {
-        if(massage.receiver.length() >= 5 )  {
-            Repository.save(massage);
-        }else {
-            System.out.println("Length massage is small: " + massage.receiver);
+    public void checkReceiverCharacter(final String receiver) {
+        if (receiver.length() >= 5) {
+            final Massage massage = new Massage(receiver, null);
+            repository.save(massage);
         }
+    }
+
+    //5
+    public Massage getByRandomIdAndChangeSender() {
+        final int number = random.nextInt();
+        final Massage massage = repository.getById(number);
+        massage.setSender("incognito");
         return massage;
+    }
+
+    //6
+    public void changeMassageSender(final Massage massage) {
+        final Optional<Massage> optionalMassage = repository.getByMessage(massage);
+        if (optionalMassage.isPresent()) {
+            optionalMassage.get().setSender("qwerty");
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
 }
