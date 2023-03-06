@@ -18,7 +18,7 @@ public class Repository {
         return null;
     }
 
-    public Massage getById(final int id) {
+    public Massage getById(final Integer id) {
         return null;
     }
 
