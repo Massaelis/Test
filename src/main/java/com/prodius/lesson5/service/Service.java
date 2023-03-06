@@ -17,12 +17,13 @@ public class Service {
     }
 
     //1
-    public void checkOfEmpty(final String sender, final String receiver) {
+    public Massage checkOfEmpty(final String sender, final String receiver) {
         if (sender == null || receiver == null) {
             throw new IllegalArgumentException();
         }
         final Massage massage = new Massage(receiver, sender);
         repository.save(massage);
+        return massage;
     }
 
     //2
@@ -39,11 +40,13 @@ public class Service {
     }
 
     //4
-    public void checkReceiverCharacter(final String receiver) {
+    public Massage checkReceiverCharacter(final String receiver) {
+        Massage massage = null;
         if (receiver.length() >= 5) {
-            final Massage massage = new Massage(receiver, null);
+            massage = new Massage(receiver, null);
             repository.save(massage);
         }
+        return massage;
     }
 
     //5
