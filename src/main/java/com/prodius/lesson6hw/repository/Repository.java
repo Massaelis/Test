@@ -1,30 +1,60 @@
 package com.prodius.lesson6hw.repository;
 
-import com.prodius.lesson6hw.product.Television;
+import com.prodius.lesson6hw.product.Product;
+import com.prodius.lesson6hw.product.ProductType;
 
-public class Repository{
-    private static Object[] objects = new Object[20];
-    public void save(final Object obj) {
-        int index = putIndex(obj);
-        if (index == objects.length){
-            int oldLength = objects.length;
+public class Repository {
+    private static Product[] products = new Product[20];
+
+    private static int index = 0;
+
+    public void save(final Product obj) {
+        if (index == products.length) {
             increaseArray();
-            objects[oldLength] = obj;
+        }
+        products[index++] = obj;
+    }
+
+    private void increaseArray() {
+        final Product[] newObj = new Product[products.length * 2];
+        System.arraycopy(products, 0, newObj, 0, products.length);
+        products = newObj;
+    }
+
+    public Product[] getAllProducts() {
+        if (index == products.length - 1) {
+            return products;
+        } else {
+            final Product[] products1 = new Product[index];
+            System.arraycopy(products, 0, products1, 0, products1.length);
+            return products1;
         }
     }
-    private int putIndex(final Object obj){
-        int index = 0;
-        for(;index < objects.length;index++){
-            if(objects[index] == null){
-                objects[index] = obj;
+
+    public Product[] getAllProducts(final ProductType type) {
+        int count = 0;
+        for (Product product : products) {
+            if (product == null) {
                 break;
             }
+            if (product.getType() == type) {
+                count++;
+            }
         }
-        return index;
-    }
-    private void increaseArray(){
-        Object[] newObj = new Object[objects.length * 2];
-        System.arraycopy(objects, 0, newObj, 0, objects.length);
-        objects = newObj;
+
+        if (count == products.length - 1) {
+            return products;
+        } else {
+            final Product[] products1 = new Product[count];
+            for (int i = 0, y = 0; i < products.length; i++) {
+                if (products[i] == null) {
+                    break;
+                }
+                if (products[i].getType() == type) {
+                    products1[y++] = products[i];
+                }
+            }
+            return products1;
+        }
     }
 }

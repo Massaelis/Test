@@ -1,14 +1,12 @@
 package com.prodius.lesson6hw;
 
+import com.prodius.lesson6hw.product.ProductType;
 import com.prodius.lesson6hw.product.Refrigerator;
 import com.prodius.lesson6hw.product.Tablet;
 import com.prodius.lesson6hw.product.Telephone;
 import com.prodius.lesson6hw.product.Television;
 import com.prodius.lesson6hw.repository.Repository;
-import com.prodius.lesson6hw.service.Count;
 import com.prodius.lesson6hw.service.Service;
-
-import java.util.Objects;
 
 /*
 ~Написать семейство классом интернет магазина.
@@ -30,26 +28,34 @@ import java.util.Objects;
  */
 public class Main {
     public static void main(String[] args) {
-        Service service = new Service();
+        Service service = new Service(new Repository());
 
-        Television television = new Television("Samsung Q8000", 500, 2,55.0,"QLED");
-        Count firstType = new Count();
-        Refrigerator refrigerator = new Refrigerator("LG 5000", 500, 2);
-        Count secondType = new Count();
-        Telephone telephone = new Telephone("Iphone XR", 500, 3,9.3, 10);
-        Count thirdType = new Count();
-        Tablet tablet = new Tablet("Ipad mini", 400, 5,7);
-        Count fourType = new Count();
+        final Television television = service.createTelevision("Samsung Q8000", 500, 2, 55.0, "QLED");
+        System.out.println(television);
 
-        service.createTelevision(television);
-        service.createRefrigerator(refrigerator);
-        service.createTelephone(telephone);
-        service.createTablet(tablet);
-        //
-        service.sumAllProduct(television,refrigerator,telephone,tablet);
-        //
-        System.out.println("Crete type products: " + Count.count);
-        //
+        final Refrigerator refrigerator = service.createRefrigerator("LG 5000", 500, 2);
+        System.out.println(refrigerator);
 
+        final Telephone telephone = service.createTelephone("Iphone XR", 500, 3, 9.3, 10);
+        System.out.println(telephone);
+
+        final Tablet tablet = service.createTablet("Ipad mini", 400, 5, 7);
+        System.out.println(tablet);
+
+        //
+        service.sumAllProduct();
+
+        //
+        service.countByType(ProductType.TABLET);
+        final Tablet tablet2 = service.createTablet("Ipad mini", 450, 5, 7);
+        service.countByType(ProductType.TABLET);
+
+        //
+        final boolean same1 = service.isTheSame(television, tablet);
+        System.out.println(same1);
+        final boolean same2 = service.isTheSame(television, television);
+        System.out.println(same2);
+        final boolean same3 = service.isTheSame(tablet, tablet2);
+        System.out.println(same3);
     }
 }

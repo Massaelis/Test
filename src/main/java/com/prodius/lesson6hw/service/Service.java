@@ -1,66 +1,105 @@
 package com.prodius.lesson6hw.service;
 
+import com.prodius.lesson6hw.product.MeasurableProduct;
+import com.prodius.lesson6hw.product.Product;
+import com.prodius.lesson6hw.product.ProductType;
 import com.prodius.lesson6hw.product.Refrigerator;
 import com.prodius.lesson6hw.product.Tablet;
 import com.prodius.lesson6hw.product.Telephone;
 import com.prodius.lesson6hw.product.Television;
 import com.prodius.lesson6hw.repository.Repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Service {
-    Repository repository = new Repository();
+    private final Repository repository;
 
-    public Television createTelevision(Television television) {
-        television = new Television(television.getName(), television.getPrice(), television.getQuantity(), television.getDiagonal(), television.getColorRendering());
+    public Service(final Repository repository) {
+        this.repository = repository;
+    }
+
+    public Television createTelevision(
+            final String name, final int price, final int quantity, final double diagonal, final String colorRendering
+    ) {
+        Television television = new Television(name, price, quantity, diagonal, colorRendering);
         repository.save(television);
-        television.display();
         return television;
     }
 
-    public Refrigerator createRefrigerator(Refrigerator refrigerator) {
-        refrigerator = new Refrigerator(refrigerator.getName(), refrigerator.getPrice(), refrigerator.getPower());
-        refrigerator.display();
+    public Refrigerator createRefrigerator(
+            final String name, final int price, final int power
+    ) {
+        Refrigerator refrigerator = new Refrigerator(name, price, power);
+        repository.save(refrigerator);
         return refrigerator;
     }
 
-    public Telephone createTelephone(Telephone telephone) {
-        telephone = new Telephone(telephone.getName(), telephone.getPrice(), telephone.getQuantity(), telephone.getDiagonal(), telephone.getGeneration());
+    public Telephone createTelephone(
+            final String name, final int price, final int quantity, final double diagonal, final int generation
+    ) {
+        Telephone telephone = new Telephone(name, price, quantity, diagonal, generation);
         repository.save(telephone);
-        telephone.display();
         return telephone;
     }
 
-    public Tablet createTablet(Tablet tablet) {
-        tablet = new Tablet(tablet.getName(), tablet.getPrice(), tablet.getQuantity(), tablet.getRating());
-        tablet.display();
+    public Tablet createTablet(
+            final String name, final int price, final int quantity, final int rating
+    ) {
+        Tablet tablet = new Tablet(name, price, quantity, rating);
+        repository.save(tablet);
         return tablet;
     }
 
-    public void sumAllProduct(Television television, Refrigerator refrigerator, Telephone telephone, Tablet tablet) {
+    public void sumAllProduct() {
+        final Product[] allProducts = repository.getAllProducts();
+        int sum = 0;
+        for (Product product : allProducts) {
+            if (product instanceof MeasurableProduct measurableProduct) {
+                sum += measurableProduct.getCount() * measurableProduct.getPrice();
+            } else {
+                sum += product.getPrice();
+            }
+        }
 
-        Integer[] integers = {television.getPrice() * television.getQuantity(),
-                refrigerator.getPrice(),
-                telephone.getPrice() * telephone.getQuantity(),
-                tablet.getPrice() * tablet.getQuantity()};
-
-        ArrayList<Integer> intList = new ArrayList<>(Arrays.asList(integers));
-        System.out.println(intList);
-
-        Integer sum = intList.stream().mapToInt(Integer::intValue).sum();
         System.out.println("Sum all products ~ " + sum);
     }
 
-
-    public void test(Television television, Refrigerator refrigerator, Telephone telephone, Tablet tablet) {
-        television = new Television(television.getName(), television.getPrice(), television.getQuantity(), television.getDiagonal(), television.getColorRendering());
-        refrigerator = new Refrigerator(refrigerator.getName(), refrigerator.getPrice(), refrigerator.getPower());
-
-        Objects.equals(television.getName(), refrigerator.getName());
-        System.out.println(Objects.equals(television, refrigerator));
-
+    public void countByType(final ProductType type) {
+        System.out.println(repository.getAllProducts(type).length);
     }
 
+    public boolean isTheSame(final Product first, final Product second) {
+        System.out.println("Compare two products:");
+        System.out.println(first);
+        System.out.println(second);
+        final boolean sameType = isTheSameType(first, second);
+        if (!sameType) {
+            return false;
+        }
+
+        final boolean sameHash = isTheSameHash(first, second);
+        if (sameHash) {
+            return isTheSameValue(first, second);
+        }
+        return false;
+    }
+
+    private boolean isTheSameValue(final Product first, final Product second) {
+        final boolean sameName = Objects.equals(first.getName(), second.getName());
+        final boolean samePrice = Objects.equals(first.getPrice(), second.getPrice());
+        return sameName && samePrice;
+    }
+
+    private boolean isTheSameHash(final Product first, final Product second) {
+        final int firstHash = Objects.hash(first.getName(), first.getPrice());
+        final int secondHash = Objects.hash(second.getName(), second.getPrice());
+        return firstHash == secondHash;
+    }
+
+    private boolean isTheSameType(final Product first, final Product second) {
+        if (first == null || second == null) {
+            return false;
+        }
+        return first.getType() == second.getType();
+    }
 }

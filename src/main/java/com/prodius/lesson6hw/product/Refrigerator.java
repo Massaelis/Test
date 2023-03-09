@@ -5,20 +5,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class Refrigerator extends Product {
     private final int power;
 
     public Refrigerator(String name, int price, int power) {
-        super(name, price);
+        super(name, price, ProductType.REFRIGERATOR);
         this.power = power;
     }
 
     @Override
-    public void display() {
-        System.out.println("Refrigerator ~ "
-                + "name: " + super.getName()
-                + "; price: " + super.getPrice() + "$"
-                + "; power: " + power + "kW");
+    public String toString() {
+        return String.format("Refrigerator ~ name: %s; price: %d$; power: %dkW",
+                super.getName(), super.getPrice(), power);
     }
 }

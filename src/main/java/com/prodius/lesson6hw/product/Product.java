@@ -5,22 +5,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-abstract class Product {
+public abstract class Product {
     private final String name;
     private final int price;
 
-    public Product(String name, int price) {
+    private final ProductType type;
+
+    protected Product(String name, int price, final ProductType type) {
         this.name = name;
         this.price = price;
+        this.type = type;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public abstract void display();
 }
