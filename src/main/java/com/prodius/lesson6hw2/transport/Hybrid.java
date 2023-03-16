@@ -1,6 +1,6 @@
 package com.prodius.lesson6hw2.transport;
 
-public class Hybrid extends Car implements FlyingTransport{
+public class Hybrid extends Car implements FlyingTransport {
     public Hybrid(String brand, String model, int year) {
         super(brand, model, year);
     }
