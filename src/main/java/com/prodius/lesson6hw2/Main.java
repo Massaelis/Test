@@ -20,10 +20,10 @@ public class Main {
         for (Transport transport : transports) {
             transport.startEngine();
 
-            if (transport instanceof RidingTransport) {
-                ((RidingTransport) transport).startMoving();
+            if (transport instanceof RidingTransport ridingTransport) {
+                ridingTransport.startMoving();
                 System.out.println("Это автомобиль");
-                ((RidingTransport) transport).stopMoving();
+                ridingTransport.stopMoving();
             }
             if (transport instanceof FlyingTransport) {
                 ((FlyingTransport) transport).takeOff();
