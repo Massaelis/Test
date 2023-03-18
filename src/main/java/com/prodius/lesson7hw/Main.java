@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Util util = new Util();
         int length = util.lengthList();
-        List<Integer> list = util.getList(length);
+        List<Integer> list = util.createList(length);
         util.testList(list);
     }
 }

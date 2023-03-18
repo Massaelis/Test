@@ -20,20 +20,26 @@ public class Util {
         return number;
     }
 
-    public List<Integer> getList(final int length) {
+    public List<Integer> createList(final int length) {
         for (int i = 0; i < length; i++)
-            System.out.println(list.add((int) (Math.random() * 100)) + " " + list.get(i));
+            System.out.println(list.add((int) (Math.random() * 100) - 50) + " " + list.get(i));
         return list;
     }
 
     public void testList(final List<Integer> list) {
         int sum = 0;
         try {
-            if (list.size() % 2 == 0) {
-                for (int i = 0; i < list.size(); i++)
-                    sum += list.get(i);
+            if (list.size() == 0) {
+                Integer.parseInt(null);
+                return;
             }
-        } catch (NumberFormatException e) {
+            for (int i = 0; i < list.size(); i++) {
+                int element = list.get(i);
+                if (element > 0) {
+                    sum += element;
+                }
+            }
+        }catch (NumberFormatException e) {
             System.out.println("NumberFormatException");
         } catch (IllegalArgumentException e) {
             System.out.println("IllegalArgumentException");
