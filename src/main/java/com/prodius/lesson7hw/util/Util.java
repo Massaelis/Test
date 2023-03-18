@@ -3,46 +3,58 @@ package com.prodius.lesson7hw.util;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Util {
-    private static final Scanner scan = new Scanner(System.in);
-    List<Integer> list = new ArrayList<>();
 
     public int lengthList() {
+        final Scanner scan = new Scanner(System.in);
+
         int number = 0;
-        try {
+        do {
             System.out.println("Введите число: ");
-            number = scan.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("InputMismatchException");
-        }
+            if (scan.hasNextInt()) {
+                number = scan.nextInt();
+            } else {
+                scan.next();
+            }
+        } while (number == 0);
+
         return number;
     }
 
     public List<Integer> createList(final int length) {
-        for (int i = 0; i < length; i++)
-            System.out.println(list.add((int) (Math.random() * 100) - 50) + " " + list.get(i));
+        final List<Integer> list = new ArrayList<>();
+        final Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(-50, 50);
+            list.add(number);
+        }
+        System.out.println(list);
         return list;
     }
 
     public void testList(final List<Integer> list) {
         int sum = 0;
+
         try {
-            if (list.size() == 0) {
-                Integer.parseInt(null);
-                return;
-            }
-            for (int i = 0; i < list.size(); i++) {
-                int element = list.get(i);
-                if (element > 0) {
+            for (int element : list) {
+                if (element >= 0) {
                     sum += element;
+                } else {
+                    try {
+                        throw new IllegalArgumentException("Invalid number " + element);
+                    } catch (InputMismatchException e) {
+                        System.out.println(e.getMessage());
+                    } catch (NumberFormatException e) {
+                        System.out.println(e.getStackTrace());
+                    } catch (IllegalArgumentException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }catch (NumberFormatException e) {
-            System.out.println("NumberFormatException");
-        } catch (IllegalArgumentException e) {
-            System.out.println("IllegalArgumentException");
         } finally {
             System.out.println(sum);
         }
