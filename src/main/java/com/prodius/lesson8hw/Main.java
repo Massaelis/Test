@@ -1,12 +1,14 @@
 package com.prodius.lesson8hw;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Date;
 import java.util.Optional;
 
 public class Main {
-    public static <T> void main(String[] args) {
-        final Optional<T> valueOne = getT(2);
-        final Optional<T> valueTwo = getT(1);
+    public static void main(String[] args) {
+        final Optional<String> valueOne = getT(2);
+        final Optional<String> valueTwo = getT(1);
 
         final Optional<Integer> valueInt = getInteger(2);
 
@@ -38,24 +40,15 @@ public class Main {
         System.out.println("~".repeat(10));
 
         System.out.println("[filter and map example:]");
-        getString(4)
-                .filter(value -> value.equals(4))
-                .map(value -> 4)
-                .ifPresentOrElse(
-                        value -> System.out.println(value),
-                        () -> System.out.println("Empty value"));
+        filterMap(valueOne);
         System.out.println("~".repeat(10));
 
         System.out.println("[ifPresentOrElse example:]");
         ifPresentOrElse(valueString);
         System.out.println("~".repeat(10));
 
-        try {
-            System.out.println("changeString example:]");
-            changeString(valueString);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("[changeString example:]");
+        changeString(valueString);
         System.out.println("~".repeat(10));
 
         System.out.println("flatMap example:]");
@@ -64,7 +57,7 @@ public class Main {
 
     }
 
-    private static <T> void get(final Optional<T> value) {
+    private static void get(final Optional<String> value) {
         if (value.isPresent()) {
             System.out.println(value.get());
         } else {
@@ -78,20 +71,55 @@ public class Main {
         });
     }
 
-    private static <T> void orElse(final Optional<T> value1, final Optional<T> value2) {
-        System.out.println(value1.orElse((T) value2));
+    private static void orElse(final Optional<String> value1, final Optional<String> value2) {
+        final String secondValue = value2.orElse(null);
+        System.out.println(value1.orElse(secondValue));
     }
 
-    private static <T> void orElseThrow(final Optional<T> value) {
+    private static void orElseThrow(final Optional<String> value) {
         Date date = new Date();
-        System.out.println(value.orElseThrow(() ->
-                new IllegalStateException(String.valueOf(date))));
+        System.out.println(value.orElseThrow(
+                () -> new IllegalStateException(String.valueOf(date))
+        ));
     }
 
-    private static <T> void orElseGet(final Optional<T> value) {
+    private static void orElseGet(final Optional<String> value) {
         System.out.println(value.orElseGet(() -> {
-            return (T) "Default value";
+            return defaultValue();
         }));
+    }
+
+    private static void filterMap(final Optional<String> input) {
+        input.filter(value -> StringUtils.isNumeric(value))
+                .map(value -> Integer.parseInt(value))
+                .ifPresentOrElse(
+                        value -> System.out.println(value),
+                        () -> System.out.println("Empty value")
+                );
+
+        input.filter(value -> {
+                    return isNumeric(value);
+                })
+                .map(value -> Integer.parseInt(value))
+                .ifPresentOrElse(
+                        value -> System.out.println(value),
+                        () -> System.out.println("Empty value")
+                );
+    }
+
+    private static boolean isNumeric(final String value) {
+        boolean isNumber = false;
+        try {
+            Integer.parseInt(value);
+            isNumber = true;
+        } catch (NumberFormatException e) {
+            System.out.println("Input not a number");
+        }
+        return isNumber;
+    }
+
+    private static String defaultValue() {
+        return "Default value";
     }
 
     private static void ifPresentOrElse(final Optional<String> valueString) {
@@ -106,40 +134,41 @@ public class Main {
     }
 
     private static void changeString(final Optional<String> valueString) {
-        StringBuilder sb = new StringBuilder();
-        if (valueString.isEmpty()) {
-            System.out.println(Optional.empty());
-        }
-        for (int i = 0; i < valueString.get().length(); i++) {
-            valueString.get().charAt(i);
-            if (i % 2 == 0) {
-                sb.append('*');
-            } else {
-                sb.append('+');
-            }
-        }
-        System.out.println(sb);
-
-        if(sb.toString().length() < 5){
-            System.out.println(Optional.of("string is short"));
-        }
+        valueString.map(value -> {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < value.length(); i++) {
+                        if (i % 2 == 0) {
+                            sb.append('*');
+                        } else {
+                            sb.append('+');
+                        }
+                    }
+                    return sb.toString();
+                })
+                .map(value -> {
+                    if (value.length() < 5) {
+                        return "string is short";
+                    }
+                    return value;
+                })
+                .ifPresentOrElse(value -> System.out.println(value),
+                        () -> System.out.println("Empty")
+                );
     }
 
-    private static <T> void flatMap(final Optional<T> valueOne, final Optional<T> valueTwo) {
-        final Optional<T> value = valueOne.flatMap(value1 -> valueTwo.map(value2 -> {
+    private static void flatMap(final Optional<String> valueOne, final Optional<String> valueTwo) {
+        valueOne.flatMap(value1 -> valueTwo.map(value2 -> {
             return merge(value1, value2);
-        }));
-        value.ifPresent(value3 -> System.out.println(value));
+        })).ifPresent(value3 -> System.out.println(value3));
 
     }
 
-    private static <T> T merge(T value1, T value2) {
-        T s = (T) (value1 + "" + value2);
-        return s;
+    private static String merge(final String value1, final String value2) {
+        return value1 + value2;
     }
 
-    private static <T> Optional<T> getT(final int id) {
-        final T value = id >= 0 ? (T) "value" : null;
+    private static Optional<String> getT(final int id) {
+        final String value = id >= 0 ? "value" : null;
         return Optional.ofNullable(value);
     }
 
