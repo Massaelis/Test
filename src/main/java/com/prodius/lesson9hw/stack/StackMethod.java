@@ -10,19 +10,22 @@ import java.lang.reflect.Array;
 public class StackMethod<E> implements Stackable<E> {
 
     private int capacity;
+
     private E[] arr;
 
+    private int head;
+
+    @SuppressWarnings("unchecked")
     public StackMethod(Class<E> clazz, int capacity) {
         arr = (E[]) Array.newInstance(clazz, capacity);
     }
-
-    private int head;
 
     //добавляет элемент на вершину стека;
     @Override
     public void push(E item) {
         if (isFull()) {
             System.out.println("Stack is full");
+            return;
         }
         arr[++head] = item;
     }
@@ -32,6 +35,7 @@ public class StackMethod<E> implements Stackable<E> {
     public E pop() {
         if (isEmpty()) {
             System.out.println("Stack is empty");
+            return null;
         }
         return arr[head--];
     }

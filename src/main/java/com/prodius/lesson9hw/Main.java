@@ -1,10 +1,11 @@
 package com.prodius.lesson9hw;
 
 import com.prodius.lesson9hw.stack.StackMethod;
+import com.prodius.lesson9hw.stack.Stackable;
 
 public class Main {
     public static void main(String[] args) {
-        StackMethod<String> stack = new StackMethod<>(String.class, 10);
+        StackMethod<String> stack = new StackMethod<>(String.class, 2);
 
         stack.push("2g");
         stack.push("4f");
@@ -25,7 +26,7 @@ public class Main {
 
         System.out.println();
 
-        StackMethod<Integer> stackInt = new StackMethod<>(Integer.class, 10);
+        Stackable<Integer> stackInt = new StackMethod<>(Integer.class, 10);
 
         stackInt.push(1);
         stackInt.push(2);
@@ -39,7 +40,7 @@ public class Main {
 
     }
 
-    private static <E> void printStack(StackMethod<E> stack) {
+    private static <E> void printStack(Stackable<E> stack) {
         while (!stack.isEmpty()) {
             E value = stack.pop();
             System.out.print(value + "; ");
