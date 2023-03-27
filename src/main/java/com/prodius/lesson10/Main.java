@@ -72,7 +72,7 @@ public class Main {
         list.add(a);
 
         final Number b = 2;
-        list.add(b);
+//        list.add(b);
     }
 
 
