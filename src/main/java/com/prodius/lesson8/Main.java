@@ -90,6 +90,7 @@ public class Main {
         final Optional<Optional<String>> incorrectState = existValue.map(value -> {
             return defaultValue;
         });
+
         incorrectState.ifPresent(value -> System.out.println(value));
 
         System.out.println("correctStateIncorrectWay:");
@@ -192,6 +193,8 @@ public class Main {
             System.out.println(value);
         });
 
+        integer.ifPresent(value -> System.out.println(value));
+
         System.out.println("EmptyValue:");
         emptyValue.map(value -> {
             int a = 100;
@@ -207,6 +210,8 @@ public class Main {
         System.out.println(existValue.orElseGet(() -> {
             return "Default value";
         }));
+
+        existValue.orElseGet(() -> "Default value");
 
         System.out.println("EmptyValue:");
         System.out.println(emptyValue.orElseGet(() -> {

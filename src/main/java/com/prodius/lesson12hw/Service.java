@@ -17,7 +17,8 @@ public class Service {
                             .ifPresentOrElse(
                                     age -> {
                                         if (map.containsKey(age)) {
-                                            map.merge(age, 1, (oldVal, newVal) -> oldVal + newVal);
+//                                            map.merge(age, 1, (oldVal, newVal) -> oldVal + newVal);
+                                            map.merge(age, 1, Integer::sum);
                                         } else {
                                             map.putIfAbsent(age, 1);
                                         }
