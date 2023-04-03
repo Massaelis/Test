@@ -1,6 +1,10 @@
 package com.prodius.lesson12hw;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -8,5 +12,5 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class Person {
-    public int age;
+    private Integer age;
 }

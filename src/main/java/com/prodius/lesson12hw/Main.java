@@ -1,35 +1,36 @@
 package com.prodius.lesson12hw;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Service service = new Service();
-        final Map<Person, Integer> map = new HashMap<>();
-        map.put(new Person(10), 1);
-        map.put(new Person(20), 2);
-        map.put(new Person(30), 3);
-        System.out.println(map);
-        //1
-        System.out.println("PutIfAbsent");
-        map.putIfAbsent(new Person(40), 4);
-        System.out.println(map);
-        //2
-        System.out.println("ComputeIfAbsent");
-        map.computeIfAbsent(new Person(50), key -> 5);
-        System.out.println(map);
-        //3
-        System.out.println("Merge");
-        map.merge(new Person(20), 1, (oldVal, newVal) -> oldVal + newVal);
+        final Service service = new Service();
+        final List<Person> list = List.of(
+                new Person(10),
+                new Person(20),
+                new Person(30),
+                new Person(20),
+                new Person(30),
+                new Person(40),
+                new Person(50),
+                new Person(20)
+        );
+        final Map<Integer, Integer> map = service.litToMap(list);
         System.out.println(map);
 
-//      personAge(map);
+        try {
+            service.litToMap(Collections.singletonList(null));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
-        map.put(null, null);
-        map.put(new Person(60), -6);
-        map.put(new Person(70), null);
+        try {
+            service.litToMap(Collections.singletonList(new Person(-4)));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
-        ArrayList<Integer> values = new ArrayList<>(map.values());
-        service.checkPersonAgeValue(values);
     }
 }
