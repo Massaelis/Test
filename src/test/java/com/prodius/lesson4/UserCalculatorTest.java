@@ -1,5 +1,7 @@
 package com.prodius.lesson4;
 
+import com.prodius.module2.lesson4.Holder;
+import com.prodius.module2.lesson4.UserCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,8 @@
 package com.prodius.lesson5.service;
 
-import com.prodius.lesson5.message.Massage;
-import com.prodius.lesson5.repository.Repository;
+import com.prodius.module2.lesson5.message.Massage;
+import com.prodius.module2.lesson5.repository.Repository;
+import com.prodius.module2.lesson5.service.Service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
