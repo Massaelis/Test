@@ -5,13 +5,15 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class SupplierX {
-    private final static Random RANDOM = new Random();
-    private final static List<String> listName = List.of(
+    private static final Random RANDOM = new Random();
+
+    private static final List<String> LIST_NAME = List.of(
             "Batman",
             "Spider-Man",
             "Iron man",
             "Claptrap",
             "One punch man"
     );
-    public final static Supplier<String> getName = () -> listName.get(RANDOM.nextInt(listName.size()));
+
+    public static final Supplier<String> GET_NAME = () -> LIST_NAME.get(RANDOM.nextInt(LIST_NAME.size()));
 }

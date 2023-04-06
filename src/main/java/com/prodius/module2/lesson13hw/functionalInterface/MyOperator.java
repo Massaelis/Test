@@ -2,23 +2,24 @@ package com.prodius.module2.lesson13hw.functionalInterface;
 
 
 public class MyOperator {
-    private static final GreatestCommonDivisor<Integer, Integer, Integer> evclide = (x, y) -> {
-        while (x != 0 && y != 0) {
-            int value = x % y;
-            x = y;
-            y = value;
+    private static final GreatestCommonDivisor<Integer> EVCLIDE = (x, y) -> {
+        int tempX = x;
+        int tempY = y;
+        while (tempX != 0 && tempY != 0) {
+            int value = tempX % tempY;
+            tempX = tempY;
+            tempY = value;
         }
-        return x;
+        return tempX;
     };
 
     public static void gcd(int a, int b) {
-        System.out.println(evclide.apply(a, b));
+        System.out.println(EVCLIDE.apply(a, b));
     }
 
     @FunctionalInterface
-    interface GreatestCommonDivisor<T, U, R> {
-        R apply(T t, U u);
+    interface GreatestCommonDivisor<T> {
+        T apply(T t, T u);
 
-        String toString();
     }
 }
