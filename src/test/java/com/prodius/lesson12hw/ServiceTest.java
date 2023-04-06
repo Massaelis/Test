@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class ServiceTest {
 
@@ -21,15 +24,15 @@ class ServiceTest {
     void litToMapSuccess() {
         // initialization
         final List<Person> list = new ArrayList<>();
-        list.add( new Person(10));
-        list.add( new Person(10));
-        list.add( new Person(30));
-        list.add( new Person(40));
+        list.add(new Person(10));
+        list.add(new Person(10));
+        list.add(new Person(30));
+        list.add(new Person(40));
 
         final Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(10,2);
-        expected.put(30,1);
-        expected.put(40,1);
+        expected.put(10, 2);
+        expected.put(30, 1);
+        expected.put(40, 1);
 
         // test method
         final Map<Integer, Integer> actual = target.litToMap(list);
@@ -42,50 +45,39 @@ class ServiceTest {
     void litToMapNullPerson() {
         // initialization
         final List<Person> list = new ArrayList<>();
-        list.add( new Person(10));
-        list.add( new Person(10));
-        list.add( new Person(30));
         list.add(null);
 
-        final Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(10,2);
-        expected.put(30,1);
-
         // test method
-        final Map<Integer, Integer> actual = target.litToMap(list);
-
         // checks
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> target.litToMap(list),
+                "List contains null"
+        );
     }
 
     @Test
     void litToMapNullAge() {
         // initialization
         final List<Person> list = new ArrayList<>();
-        list.add( new Person(10));
-        list.add( new Person(10));
-        list.add( new Person(30));
-        list.add( new Person(null));
+        list.add(new Person(null));
 
-        final Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(10,2);
-        expected.put(30,1);
 
         // test method
-        final Map<Integer, Integer> actual = target.litToMap(list);
-
         // checks
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrowsExactly(
+                IllegalArgumentException.class,
+                () -> target.litToMap(list),
+                "Negative age is not allowed"
+        );
     }
 
     @Test
     void litToMapEmptyList() {
         // initialization
         final List<Person> list = new ArrayList<>();
-        // TODO: 03/04/23
 
         final Map<Integer, Integer> expected = new HashMap<>();
-        // TODO: 03/04/23
 
         // test method
         final Map<Integer, Integer> actual = target.litToMap(list);
