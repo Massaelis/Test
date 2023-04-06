@@ -12,4 +12,6 @@ public interface List<T> {
     void remove(T value);
 
     int indexOf(T value);
+
+    String toString2();
 }

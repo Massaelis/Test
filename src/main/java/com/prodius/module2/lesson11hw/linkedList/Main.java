@@ -12,6 +12,7 @@ public class Main {
         linkedList.addFirst(5);
 
         System.out.println(linkedList);
+        System.out.println(linkedList.toString2());
 
         linkedList.remove(10);
         System.out.println(linkedList);

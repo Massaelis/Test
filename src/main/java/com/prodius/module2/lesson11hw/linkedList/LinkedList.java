@@ -1,8 +1,10 @@
 package com.prodius.module2.lesson11hw.linkedList;
 
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LinkedList<T> implements List<T> {
     private Node<T> head;
@@ -160,6 +162,24 @@ public class LinkedList<T> implements List<T> {
         }
 
         return String.format("LinkedList: {%s}", sb);
+    }
+
+    @Override
+    public String toString2() {
+        final ArrayList<Node<T>> nodes = new ArrayList<>();
+
+        Node<T> current = head;
+        while (current != null) {
+            nodes.add(current);
+            current = current.next;
+        }
+
+        final String rc = nodes.stream()
+                .map(tNode -> tNode.value)
+                .map(Object::toString)
+                .collect(Collectors.joining(" "));
+
+        return String.format("LinkedList: {%s}", rc);
     }
 
     private static class Node<T> {
