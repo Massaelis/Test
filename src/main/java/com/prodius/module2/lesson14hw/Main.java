@@ -1,67 +1,63 @@
 package com.prodius.module2.lesson14hw;
 
-import lombok.Getter;
-import lombok.ToString;
-
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        final Product telephone1 = new Product("iPhone XR", 500, 2);
-        final Product telephone2 = new Product("iPhone 7", 400, 4);
-        final Product telephone3 = new Product("iPhone 13", 900, 1);
-        final Order order1 = new Order(1, List.of(telephone1, telephone2, telephone3));
-        
-        final Product television1 = new Product("Samsung Q47", 600, 1);
-        final Product television2 = new Product("Samsung Q50", 700, 3);
-        final Product television3 = new Product("Samsung Q60", 800, 2);
-        final Order order2 = new Order(2, List.of(television1, television2, television3));
-
-        final Product telephone4 = new Product("iPhone XR", 500, 3);
-        final Product telephone5 = new Product("iPhone 7", 400, 3);
-        final Order order3 = new Order(4, List.of(telephone4, telephone5));
-
-        final Product television4 = new Product("Samsung Q47", 600, 2);
-        final Product television5 = new Product("Samsung Q50", 700, 2);
-        final Order order4 = new Order(3, List.of(television4, television5));
+        final List<Order> orderList = prepareData();
 
 
 //      a
-        final List<Product> orders = Stream.of(order1, order2)
-//                .filter(p -> p.getProduct().get(0).getPrice() * p.getProduct().get(0).getQuantity() > 5000)
-//                .filter(p -> p.getProduct().get(1).getPrice() * p.getProduct().get(1).getQuantity() > 5000)
-                .flatMap(order -> order.getProduct().stream())
-                .peek(p -> System.out.println(p.getPrice() * p.getQuantity()))
-                .filter(product -> product.getPrice() * product.getQuantity() > 1000)
+        final List<Order> orders = orderList.stream()
+                .filter(
+                        order -> order.getProduct().stream()
+                                .mapToDouble(product -> product.getPrice() * product.getQuantity())
+                                .sum() > 2000
+                ).filter(
+                        order -> {
+                            int sum = 0;
+                            for (Product product : order.getProduct()) {
+                                sum += product.getPrice() * product.getQuantity();
+                            }
+                            return sum > 2000;
+                        }
+                ).filter(order -> sumOfPrices2(order) > 2000)
                 .collect(Collectors.toList());
         System.out.println(orders);
-//      test
-        final double orders2 = Stream.of(order1, order2)
-                .flatMap(order -> order.getProduct().stream())
-                .mapToDouble((c) -> Double.parseDouble(String.valueOf(c.getPrice() * c.getQuantity()))).sum();
-        System.out.println(orders2);
 
 //      b & i
-        final List<Order> sorted = new ArrayList<>(Arrays.asList(order1, order2, order3, order4))
-                .stream()
-                .sorted(Comparator
-                        .comparingInt(Order::getOrderId)
-                        .reversed()
-                )
+        final List<Order> sorted = orderList.stream()
+                .sorted(Comparator.comparingInt(Order::getOrderId).reversed())
+                .peek(System.out::println)
                 .collect(Collectors.toList());
-//        sorted.forEach(System.out::println);
+        System.out.println(sorted);
+
+        // c
+        final List<String> collect = orderList.stream()
+                .flatMap(order -> order.getProduct().stream())
+                .map(Product::getName)
+                .collect(Collectors.toList());
+        System.out.println(collect);
 
 //      d
-        final List<Order> limit = new ArrayList<>(Arrays.asList(order1, order2, order3, order4))
-                .stream()
+        final List<Order> limit = orderList.stream()
                 .limit(3)
                 .collect(Collectors.toList());
-//        limit.forEach(System.out::println);
+        System.out.println(limit);
+
+        // e
+        final Map<Integer, Double> doubleMap = orderList.stream()
+                .collect(Collectors.toMap(
+                        Order::getOrderId,
+                        Main::sumOfPrices2
+                ));
+        System.out.println(doubleMap);
 
 //      f
-        Stream.of(order1, order2)
+        orderList.stream()
                 .flatMap(order -> order.getProduct().stream())
                 .mapToDouble(Product::getPrice)
                 .max()
@@ -69,51 +65,41 @@ public class Main {
 
 
 //      g
-        final boolean anyMatch = Stream.of(order1, order2)
+        final boolean anyMatch = orderList.stream()
                 .flatMap(order -> order.getProduct().stream())
-                .anyMatch(television2::equals);
+                .anyMatch(product -> "iPhone XR".equals(product.getName()));
         System.out.println(anyMatch);
 
     }
 
+    private static List<Order> prepareData() {
+        final Product telephone1 = new Product("iPhone XR", 500, 8);
+        final Product telephone2 = new Product("iPhone 7", 400, 4);
+        final Product telephone3 = new Product("iPhone 13", 900, 1);
+        final Order order1 = new Order(1, List.of(telephone1, telephone2, telephone3));
 
-//    public static double sumOfPrices2(List<Product> orders) {
-//        double sum = 0.0;
-//        for (Product products : orders) {
-//            sum += products.getPrice();
-//        }
-//        return sum;
-//    }
-}
+        final Product television1 = new Product("Samsung Q47", 600, 1);
+        final Product television2 = new Product("Samsung Q50", 700, 3);
+        final Product television3 = new Product("Samsung Q60", 800, 2);
+        final Order order2 = new Order(2, List.of(television1, television2, television3));
 
-@ToString
-@Getter
-class Order {
-    private final int orderId;
-    private List<Product> product;
+        final Product telephone4 = new Product("iPhone XR", 500, 3);
+        final Product telephone5 = new Product("iPhone 7", 400, 8);
+        final Order order3 = new Order(4, List.of(telephone4, telephone5));
 
-    Order(int orderId, List<Product> product) {
-        this.orderId = orderId;
-        this.product = product;
-    }
+        final Product television4 = new Product("Samsung Q47", 600, 2);
+        final Product television5 = new Product("Samsung Q50", 700, 2);
+        final Order order4 = new Order(3, List.of(television4, television5));
 
-    Order(int orderId) {
-        this.orderId = orderId;
+        return List.of(order1, order2, order3, order4);
     }
 
 
-}
-
-@ToString
-@Getter
-class Product {
-    private final String name;
-    private final double price;
-    private final int quantity;
-
-    Product(String name, double price, int quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+    public static double sumOfPrices2(final Order order) {
+        double sum = 0.0;
+        for (Product product : order.getProduct()) {
+            sum += product.getPrice() * product.getQuantity();
+        }
+        return sum;
     }
 }
