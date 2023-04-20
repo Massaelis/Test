@@ -6,10 +6,13 @@ import com.prodius.module2.module.vehicle.typeVehicle.Bicycle;
 import com.prodius.module2.module.vehicle.typeVehicle.Car;
 import com.prodius.module2.module.vehicle.typeVehicle.Motorcycle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        Vehicle vehicle = new Vehicle(Type.DEFAULT, 0, "Default", 0, 0);
-
+        List<Vehicle> transportList = new ArrayList<>();
+        Vehicle vehicle = new Vehicle();
         Car car = new Car(4, "Subaru", 2017, 250);
         car.move();
         car.calculateSpeed();
@@ -24,29 +27,29 @@ public class Main {
         motorcycle.move();
         motorcycle.calculateSpeed();
 
-        vehicle.addTransport(car);
-        vehicle.addTransport(car2);
-        vehicle.addTransport(motorcycle);
-        vehicle.addTransport(bicycle);
+        vehicle.addTransport(car, transportList);
+        vehicle.addTransport(car2, transportList);
+        vehicle.addTransport(motorcycle, transportList);
+        vehicle.addTransport(bicycle, transportList);
 
-        vehicle.removeTransport(car2);
+        vehicle.removeTransport(car2, transportList);
 
         System.out.println("~".repeat(10) + "Get Transport List" + "~".repeat(10));
-        vehicle.getTransportList();
+        vehicle.getTransportList(transportList);
 
         System.out.println("~".repeat(10) + "Sort by Brand" + "~".repeat(10));
-        vehicle.sortTransportByBrand();
+        vehicle.sortTransportByBrand(transportList);
 
         System.out.println("~".repeat(10) + "Sort by Year" + "~".repeat(10));
-        vehicle.sortTransportByYear();
+        vehicle.sortTransportByYear(transportList);
 
         System.out.println("~".repeat(10) + "Sort by MaxSpeed" + "~".repeat(10));
-        vehicle.sortTransportByMaxSpeed();
+        vehicle.sortTransportByMaxSpeed(transportList);
 
         System.out.println("~".repeat(10) + "Filter by MaxSpeed" + "~".repeat(10));
-        vehicle.filterTransportByMaxSpeed(180);
+        vehicle.filterTransportByMaxSpeed(180, transportList);
 
-        TransportFileReader.saveVehicleToFile();
+        TransportFileReader.saveVehicleToFile(transportList);
 
         System.out.println("~".repeat(10) + "Read from file" + "~".repeat(10));
         TransportFileReader.readeVehicleFromFile();

@@ -4,13 +4,14 @@ import com.prodius.module2.module.vehicle.Type;
 import com.prodius.module2.module.vehicle.Vehicle;
 
 import java.io.*;
+import java.util.List;
 
 public class TransportFileReader {
     private static final String NOTES_FILE = "src/main/resources/vehicle.txt";
 
-    public static void saveVehicleToFile() {
+    public static void saveVehicleToFile(List<Vehicle> transportList) {
         try (final BufferedWriter writer = new BufferedWriter(new FileWriter(NOTES_FILE))) {
-            for (Vehicle note : Vehicle.transportList) {
+            for (Vehicle note : transportList) {
                 final Type type = note.getType();
                 final int numberOfWheels = note.getNumberOfWheels();
                 final String brand = note.getBrand();
@@ -23,7 +24,6 @@ public class TransportFileReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void readeVehicleFromFile() {

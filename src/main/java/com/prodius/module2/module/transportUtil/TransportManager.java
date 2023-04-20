@@ -2,21 +2,22 @@ package com.prodius.module2.module.transportUtil;
 
 import com.prodius.module2.module.vehicle.Vehicle;
 
+import java.util.List;
 
 public interface TransportManager {
-    void addTransport(Vehicle transport);
+    List<Vehicle> addTransport(Vehicle transport, List<Vehicle> transportList);
 
-    void removeTransport(Vehicle transport);
+    List<Vehicle> removeTransport(Vehicle transport, List<Vehicle> transportList);
 
-    void getTransportList();
+    List<Vehicle> getTransportList(List<Vehicle> transportList);
 
     void findTransportByBrand(String brand);
 
-    void sortTransportByBrand();
+    List<Vehicle> sortTransportByBrand(List<Vehicle> transportList);
 
-    void sortTransportByYear();
+    List<Vehicle> sortTransportByYear(List<Vehicle> transportList);
 
-    void sortTransportByMaxSpeed();
+    List<Vehicle> sortTransportByMaxSpeed(List<Vehicle> transportList);
 
-    void filterTransportByMaxSpeed(int maxSpeed);
+    List<Vehicle> filterTransportByMaxSpeed(int maxSpeed, List<Vehicle> transportList);
 }

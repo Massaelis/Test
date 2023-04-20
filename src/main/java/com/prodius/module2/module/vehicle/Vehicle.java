@@ -11,10 +11,9 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 public class Vehicle extends Transport implements Movable, TransportManager {
-    public static List<Vehicle> transportList = new ArrayList<>();
-    private final String brand;
-    private final int yearOfIssue;
-    private final double maxSpeed;
+    private String brand;
+    private int yearOfIssue;
+    private double maxSpeed;
 
     public Vehicle(final Type type, final int numberOfWheels, final String brand,
                    final int yearOfIssue, final double maxSpeed) {
@@ -22,6 +21,10 @@ public class Vehicle extends Transport implements Movable, TransportManager {
         this.brand = brand;
         this.yearOfIssue = yearOfIssue;
         this.maxSpeed = maxSpeed;
+    }
+
+    public Vehicle(){
+
     }
 
     public String toString() {
@@ -45,18 +48,21 @@ public class Vehicle extends Transport implements Movable, TransportManager {
     }
 
     @Override
-    public void addTransport(Vehicle transport) {
+    public List<Vehicle> addTransport(Vehicle transport, List<Vehicle> transportList) {
         transportList.add(transport);
+        return transportList;
     }
 
     @Override
-    public void removeTransport(Vehicle transport) {
+    public List<Vehicle> removeTransport(Vehicle transport, List<Vehicle> transportList) {
         transportList.remove(transport);
+        return transportList;
     }
 
     @Override
-    public void getTransportList() {
+    public List<Vehicle> getTransportList(List<Vehicle> transportList) {
         System.out.println(transportList);
+        return transportList;
     }
 
     //сделать!!!
@@ -66,25 +72,29 @@ public class Vehicle extends Transport implements Movable, TransportManager {
     }
 
     @Override
-    public void sortTransportByBrand() {
-        TransportSorter.sortByBrand();
+    public List<Vehicle> sortTransportByBrand(List<Vehicle> transportList) {
+        TransportSorter.sortByBrand(transportList);
+        return transportList;
     }
 
     @Override
-    public void sortTransportByYear() {
-        TransportSorter.sortByYear();
+    public List<Vehicle> sortTransportByYear(List<Vehicle> transportList) {
+        TransportSorter.sortByYear(transportList);
+        return transportList;
     }
 
     @Override
-    public void sortTransportByMaxSpeed() {
-        TransportSorter.sortByMaxSpeed();
+    public List<Vehicle> sortTransportByMaxSpeed(List<Vehicle> transportList) {
+        TransportSorter.sortByMaxSpeed(transportList);
+        return transportList;
     }
 
     @Override
-    public void filterTransportByMaxSpeed(int maxSpeeds) {
+    public List<Vehicle> filterTransportByMaxSpeed(int maxSpeeds, List<Vehicle> transportList) {
         final List<Vehicle> filterList = transportList.stream()
                 .filter(vehicle -> vehicle.maxSpeed <= maxSpeeds)
                 .collect(Collectors.toList());
         System.out.println(filterList);
+        return filterList;
     }
 }
