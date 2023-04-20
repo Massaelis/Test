@@ -1,0 +1,3 @@
+CAR| 4| Subaru| 2017| 250.0
+MOTORCYCLE| 2| Loncine| 2021| 180.0
+BICYCLE| 2| Local| 2020| 40.0
