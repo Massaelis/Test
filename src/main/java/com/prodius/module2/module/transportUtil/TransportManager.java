@@ -2,22 +2,51 @@ package com.prodius.module2.module.transportUtil;
 
 import com.prodius.module2.module.vehicle.Vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface TransportManager {
-    List<Vehicle> addTransport(Vehicle transport, List<Vehicle> transportList);
+public class TransportManager {
 
-    List<Vehicle> removeTransport(Vehicle transport, List<Vehicle> transportList);
+    public static List<Vehicle> transportList = new ArrayList<>();
 
-    List<Vehicle> getTransportList(List<Vehicle> transportList);
+    public void addTransport(Vehicle transport) {
+        transportList.add(transport);
+    }
 
-    void findTransportByBrand(String brand);
+    public void removeTransport(Vehicle transport) {
+        transportList.remove(transport);
+    }
 
-    List<Vehicle> sortTransportByBrand(List<Vehicle> transportList);
+    public List<Vehicle> getTransportList() {
+        System.out.println(transportList);
+        return transportList;
+    }
 
-    List<Vehicle> sortTransportByYear(List<Vehicle> transportList);
+    //сделать!!!
+    public boolean findTransportByBrand(String brand) {
+        final boolean filterList = transportList.stream()
+                .anyMatch(vehicle -> vehicle.getBrand().equals(brand));
+        System.out.println(filterList);
+        return filterList;
+    }
 
-    List<Vehicle> sortTransportByMaxSpeed(List<Vehicle> transportList);
+    public void sortTransportByBrand() {
+        TransportSorter.sortByBrand(transportList);
+    }
 
-    List<Vehicle> filterTransportByMaxSpeed(int maxSpeed, List<Vehicle> transportList);
+    public void sortTransportByYear() {
+        TransportSorter.sortByYear(transportList);
+    }
+
+    public void sortTransportByMaxSpeed() {
+        TransportSorter.sortByMaxSpeed(transportList);
+    }
+
+    public void filterTransportByMaxSpeed(int maxSpeeds) {
+        final List<Vehicle> filterList = transportList.stream()
+                .filter(vehicle -> vehicle.getMaxSpeed() <= maxSpeeds)
+                .collect(Collectors.toList());
+        System.out.println(filterList);
+    }
 }

@@ -7,10 +7,10 @@ public class Motorcycle extends Vehicle {
     public Motorcycle(int numberOfWheels, String brand, int yearOfIssue, double maxSpeed) {
         super(Type.MOTORCYCLE, numberOfWheels, brand, yearOfIssue, maxSpeed);
     }
-//    @Override
-//    public void calculateSpeed() {
-//        System.out.println("Speed " + getType() + ": " + getMaxSpeed());
-//    }
+    @Override
+    public void calculateSpeed() {
+        System.out.println("Speed " + getType() + ": " + getMaxSpeed() + " or more");
+    }
 
     public String toString() {
         return "Motorcycle {"

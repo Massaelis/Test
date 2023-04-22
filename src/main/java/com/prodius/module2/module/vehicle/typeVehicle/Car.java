@@ -9,10 +9,10 @@ public class Car extends Vehicle {
         super(Type.CAR, numberOfWheels, brand, yearOfIssue, maxSpeed);
     }
 
-//    @Override
-//    public void calculateSpeed() {
-//        System.out.println("Speed " + getType() + ": " + getMaxSpeed());
-//    }
+    @Override
+    public void calculateSpeed() {
+        System.out.println("Speed " + getType() + ": " + getMaxSpeed() + " speed car");
+    }
 
     public String toString() {
         return "Car {"

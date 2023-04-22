@@ -11,7 +11,7 @@ public class Bicycle extends Vehicle {
 
     @Override
     public void calculateSpeed() {
-        System.out.println("Speed " + getType() + ": " + getMaxSpeed() + " or more");
+        System.out.println("Speed " + getType() + ": " + getMaxSpeed() + " or low");
     }
 
     public String toString() {

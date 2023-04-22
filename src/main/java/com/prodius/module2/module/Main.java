@@ -1,18 +1,14 @@
 package com.prodius.module2.module;
 
 import com.prodius.module2.module.transportUtil.TransportFileReader;
-import com.prodius.module2.module.vehicle.*;
+import com.prodius.module2.module.transportUtil.TransportManager;
 import com.prodius.module2.module.vehicle.typeVehicle.Bicycle;
 import com.prodius.module2.module.vehicle.typeVehicle.Car;
 import com.prodius.module2.module.vehicle.typeVehicle.Motorcycle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
-        List<Vehicle> transportList = new ArrayList<>();
-        Vehicle vehicle = new Vehicle();
+        TransportManager transportManager = new TransportManager();
         Car car = new Car(4, "Subaru", 2017, 250);
         car.move();
         car.calculateSpeed();
@@ -27,31 +23,34 @@ public class Main {
         motorcycle.move();
         motorcycle.calculateSpeed();
 
-        vehicle.addTransport(car, transportList);
-        vehicle.addTransport(car2, transportList);
-        vehicle.addTransport(motorcycle, transportList);
-        vehicle.addTransport(bicycle, transportList);
+        transportManager.addTransport(car);
+        transportManager.addTransport(car2);
+        transportManager.addTransport(motorcycle);
+        transportManager.addTransport(bicycle);
 
-        vehicle.removeTransport(car2, transportList);
+        transportManager.removeTransport(car2);
 
         System.out.println("~".repeat(10) + "Get Transport List" + "~".repeat(10));
-        vehicle.getTransportList(transportList);
+        transportManager.getTransportList();
 
         System.out.println("~".repeat(10) + "Sort by Brand" + "~".repeat(10));
-        vehicle.sortTransportByBrand(transportList);
+        transportManager.sortTransportByBrand();
 
         System.out.println("~".repeat(10) + "Sort by Year" + "~".repeat(10));
-        vehicle.sortTransportByYear(transportList);
+        transportManager.sortTransportByYear();
 
         System.out.println("~".repeat(10) + "Sort by MaxSpeed" + "~".repeat(10));
-        vehicle.sortTransportByMaxSpeed(transportList);
+        transportManager.sortTransportByMaxSpeed();
 
         System.out.println("~".repeat(10) + "Filter by MaxSpeed" + "~".repeat(10));
-        vehicle.filterTransportByMaxSpeed(180, transportList);
+        transportManager.filterTransportByMaxSpeed(180);
 
-        TransportFileReader.saveVehicleToFile(transportList);
+        TransportFileReader.saveVehicleToFile(TransportManager.transportList);
 
         System.out.println("~".repeat(10) + "Read from file" + "~".repeat(10));
         TransportFileReader.readeVehicleFromFile();
+
+        System.out.println("~".repeat(10) + "Find transport by brand" + "~".repeat(10));
+        transportManager.findTransportByBrand("Subaru");
     }
 }
