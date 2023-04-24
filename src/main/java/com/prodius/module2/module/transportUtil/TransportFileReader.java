@@ -7,7 +7,9 @@ import com.prodius.module2.module.vehicle.typeVehicle.Car;
 import com.prodius.module2.module.vehicle.typeVehicle.Motorcycle;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TransportFileReader {
     private static final String NOTES_FILE = "src/main/resources/vehicle.txt";
@@ -20,9 +22,8 @@ public class TransportFileReader {
                 final String brand = note.getBrand();
                 final int yearOfIssue = note.getYearOfIssue();
                 final double maxSpeed = note.getMaxSpeed();
-//                writer.write(String.format("Type: %s, Wheels: %s, Brand: %s, Year: %s, Max speed: %s%n",
-//                type, numberOfWheels, brand, yearOfIssue, maxSpeed));
-                writer.write(String.format("%s| %s| %s| %s| %s%n", type, numberOfWheels, brand, yearOfIssue, maxSpeed));
+                writer.write(String.format("Type: %s, Wheels: %s, Brand: %s, Year: %s, Max speed: %s%n",
+                type, numberOfWheels, brand, yearOfIssue, maxSpeed));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,18 +34,20 @@ public class TransportFileReader {
         try (final BufferedReader reader = new BufferedReader(new FileReader(NOTES_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                final String[] parts = line.split("\\| ");
-                final Type type = Type.valueOf(parts[0]);
-                final int numberOfWheels = Integer.parseInt(parts[1]);
-                final String brand = parts[2];
-                final int yearOfIssue = Integer.parseInt(parts[3]);
-                final double maxSpeed = Double.parseDouble((parts[4]));
+                List<String> parts = Arrays.stream(new String[]{line})
+                        .flatMap(line2 -> Stream.of(line2.split(", ")))
+                        .flatMap(line2 -> Stream.of(line2.split(": "))).toList();
+                final Type type = Type.valueOf(parts.get(1));
+                final int numberOfWheels = Integer.parseInt(parts.get(3));
+                final String brand = parts.get(5);
+                final int yearOfIssue = Integer.parseInt(parts.get(7));
+                final double maxSpeed = Double.parseDouble((parts.get(9)));
 
                 Vehicle note = null;
                 switch (type){
                     case CAR -> note = new Car( numberOfWheels, brand, yearOfIssue, maxSpeed);
                     case BICYCLE -> note = new Bicycle( numberOfWheels, brand, yearOfIssue, maxSpeed);
-                    case MOTORCYCLE -> note = new Motorcycle( numberOfWheels, brand, yearOfIssue, maxSpeed); 
+                    case MOTORCYCLE -> note = new Motorcycle( numberOfWheels, brand, yearOfIssue, maxSpeed);
                 }
                 System.out.println(note);
             }
