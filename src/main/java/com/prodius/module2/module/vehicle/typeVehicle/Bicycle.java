@@ -5,7 +5,7 @@ import com.prodius.module2.module.vehicle.Vehicle;
 
 public class Bicycle extends Vehicle {
 
-    public Bicycle(int numberOfWheels, String brand, int yearOfIssue, double maxSpeed) {
+    public Bicycle(final int numberOfWheels, final String brand, final int yearOfIssue, final double maxSpeed) {
         super(Type.BICYCLE, numberOfWheels, brand, yearOfIssue, maxSpeed);
     }
 

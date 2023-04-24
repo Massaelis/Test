@@ -6,9 +6,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Vehicle extends Transport implements Movable{
-    private String brand;
-    private int yearOfIssue;
-    private double maxSpeed;
+    private final String brand;
+    private final int yearOfIssue;
+    private final double maxSpeed;
 
     public Vehicle(final Type type, final int numberOfWheels, final String brand,
                    final int yearOfIssue, final double maxSpeed) {
@@ -16,10 +16,6 @@ public class Vehicle extends Transport implements Movable{
         this.brand = brand;
         this.yearOfIssue = yearOfIssue;
         this.maxSpeed = maxSpeed;
-    }
-
-    public Vehicle(){
-
     }
 
     public String toString() {

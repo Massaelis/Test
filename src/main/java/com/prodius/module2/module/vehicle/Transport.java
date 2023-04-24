@@ -8,17 +8,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public abstract class Transport {
-    private Type type;
-    private int numberOfWheels;
+    private final Type type;
+    private final int numberOfWheels;
 
     protected Transport(final Type type, final int numberOfWheels) {
         this.type = type;
         this.numberOfWheels = numberOfWheels;
     }
 
-    public Transport() {
-
-    }
 
     public abstract void calculateSpeed();
 }

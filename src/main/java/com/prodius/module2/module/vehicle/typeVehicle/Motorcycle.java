@@ -4,7 +4,7 @@ import com.prodius.module2.module.vehicle.Type;
 import com.prodius.module2.module.vehicle.Vehicle;
 
 public class Motorcycle extends Vehicle {
-    public Motorcycle(int numberOfWheels, String brand, int yearOfIssue, double maxSpeed) {
+    public Motorcycle(final int numberOfWheels, final String brand, final int yearOfIssue, final double maxSpeed) {
         super(Type.MOTORCYCLE, numberOfWheels, brand, yearOfIssue, maxSpeed);
     }
     @Override
