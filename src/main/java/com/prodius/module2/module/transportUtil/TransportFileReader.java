@@ -2,6 +2,9 @@ package com.prodius.module2.module.transportUtil;
 
 import com.prodius.module2.module.vehicle.Type;
 import com.prodius.module2.module.vehicle.Vehicle;
+import com.prodius.module2.module.vehicle.typeVehicle.Bicycle;
+import com.prodius.module2.module.vehicle.typeVehicle.Car;
+import com.prodius.module2.module.vehicle.typeVehicle.Motorcycle;
 
 import java.io.*;
 import java.util.List;
@@ -37,7 +40,12 @@ public class TransportFileReader {
                 final int yearOfIssue = Integer.parseInt(parts[3]);
                 final double maxSpeed = Double.parseDouble((parts[4]));
 
-                final Vehicle note = new Vehicle(type, numberOfWheels, brand, yearOfIssue, maxSpeed);
+                Vehicle note = null;
+                switch (type){
+                    case CAR -> note = new Car( numberOfWheels, brand, yearOfIssue, maxSpeed);
+                    case BICYCLE -> note = new Bicycle( numberOfWheels, brand, yearOfIssue, maxSpeed);
+                    case MOTORCYCLE -> note = new Motorcycle( numberOfWheels, brand, yearOfIssue, maxSpeed); 
+                }
                 System.out.println(note);
             }
         } catch (FileNotFoundException e) {

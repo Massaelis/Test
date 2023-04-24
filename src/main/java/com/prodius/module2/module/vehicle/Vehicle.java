@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Vehicle extends Transport implements Movable{
+public abstract class Vehicle extends Transport implements Movable{
     private final String brand;
     private final int yearOfIssue;
     private final double maxSpeed;
