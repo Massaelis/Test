@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class TransportManager {
 
-    public static List<Vehicle> transportList = new ArrayList<>();
+    private List<Vehicle> transportList = new ArrayList<>();
 
     public void addTransport(Vehicle transport) {
         transportList.add(transport);
@@ -32,7 +32,7 @@ public class TransportManager {
     }
 
     public void sortTransportByBrand() {
-        TransportSorter.sortByBrand(transportList);
+        transportList = TransportSorter.sortByBrand(transportList);
     }
 
     public void sortTransportByYear() {
@@ -43,10 +43,11 @@ public class TransportManager {
         TransportSorter.sortByMaxSpeed(transportList);
     }
 
-    public void filterTransportByMaxSpeed(int maxSpeeds) {
+    public List<Vehicle> filterTransportByMaxSpeed(int maxSpeeds) {
         final List<Vehicle> filterList = transportList.stream()
                 .filter(vehicle -> vehicle.getMaxSpeed() <= maxSpeeds)
                 .collect(Collectors.toList());
         System.out.println(filterList);
+        return filterList;
     }
 }

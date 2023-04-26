@@ -45,7 +45,7 @@ public class Main {
         System.out.println("~".repeat(10) + "Filter by MaxSpeed" + "~".repeat(10));
         transportManager.filterTransportByMaxSpeed(180);
 
-        TransportFileReader.saveVehicleToFile(TransportManager.transportList);
+        TransportFileReader.saveVehicleToFile(transportManager.getTransportList());
 
         System.out.println("~".repeat(10) + "Read from file" + "~".repeat(10));
         TransportFileReader.readeVehicleFromFile();
