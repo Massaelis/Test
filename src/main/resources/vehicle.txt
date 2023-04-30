@@ -1,0 +1,3 @@
+Type: CAR, Wheels: 4, Brand: Subaru, Year: 2017, Max speed: 250.0
+Type: MOTORCYCLE, Wheels: 2, Brand: Loncine, Year: 2021, Max speed: 180.0
+Type: BICYCLE, Wheels: 2, Brand: Local, Year: 2020, Max speed: 40.0
