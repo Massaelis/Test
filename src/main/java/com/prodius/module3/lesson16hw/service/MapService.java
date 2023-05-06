@@ -7,10 +7,10 @@ import com.prodius.module3.lesson16hw.repository.Repository;
 
 @Singleton
 public class MapService {
-    private final Repository repository;
+    private final Repository<String, String> repository;
 
     @Autowired(aClass = MapRepository.class)
-    public MapService(final Repository repository) {
+    public MapService(final Repository<String, String> repository) {
         this.repository = repository;
     }
 }

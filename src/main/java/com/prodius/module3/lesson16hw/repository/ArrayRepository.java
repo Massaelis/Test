@@ -6,26 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-public class ArrayRepository<T> extends Repository {
-    List<T> list = new ArrayList<>();
+public class ArrayRepository<T> extends Repository<T, Integer> {
+    private final List<T> list = new ArrayList<>();
 
     @Override
-    public void set(Object index, Object o) {
-        list.set((Integer) index, (T) o);
+    public void set(Integer index, T o) {
+        list.set(index, o);
     }
 
     @Override
-    public void addIndex(Object index, Object o) {
-        list.add((Integer) index, (T) o);
+    public void addIndex(Integer index, T o) {
+        list.add(index, o);
     }
 
     @Override
-    public void add(Object o) {
-        list.add((T) o);
+    public void add(T o) {
+        list.add(o);
     }
 
     @Override
-    public void remove(Object value) {
+    public void remove(T value) {
         list.remove(value);
     }
 

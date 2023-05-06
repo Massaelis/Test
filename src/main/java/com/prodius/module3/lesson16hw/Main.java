@@ -1,35 +1,34 @@
 package com.prodius.module3.lesson16hw;
 
 import com.prodius.module3.lesson16hw.annotation.Annotation;
-import com.prodius.module3.lesson16hw.repository.ArrayRepository;
-import com.prodius.module3.lesson16hw.repository.ListRepository;
-import com.prodius.module3.lesson16hw.repository.MapRepository;
 import com.prodius.module3.lesson16hw.util.SaveFile;
 
 
 public class Main {
     public static void main(String[] args) {
-        new Annotation().annotationHandler();
+        final Annotation annotation = new Annotation();
+        annotation.annotationHandler();
+        SaveFile.saveToFile(annotation.getCache());
 
-        MapRepository mapRepository = new MapRepository();
+        /*MapRepository<String, Integer> mapRepository = new MapRepository<>();
         mapRepository.addIndex("1", 1);
-        mapRepository.addIndex("2", 1);
-        mapRepository.remove("2");
+        mapRepository.addIndex("2", 2);
+        mapRepository.remove(2);
         mapRepository.show();
 
-        ListRepository listRepository = new ListRepository();
+        ListRepository<Integer> listRepository = new ListRepository<>();
         listRepository.add(2);
         listRepository.add(3);
         listRepository.set(1, 4);
         listRepository.remove(2);
         listRepository.show();
 
-        ArrayRepository arrayRepository = new ArrayRepository();
+        ArrayRepository<Integer> arrayRepository = new ArrayRepository<>();
         arrayRepository.add(4);
-        arrayRepository.addIndex(0, "1a");
+        arrayRepository.addIndex(0, 0);
         arrayRepository.set(1, 2);
-        arrayRepository.show();
+        arrayRepository.show();*/
 
-        SaveFile.saveToFile(Annotation.CACHE);
+
     }
 }

@@ -7,10 +7,10 @@ import com.prodius.module3.lesson16hw.repository.Repository;
 
 @Singleton
 public class ArrayService {
-    private final Repository repository;
+    private final Repository<String, Integer> repository;
 
     @Autowired(aClass = ArrayRepository.class)
-    public ArrayService(final Repository repository) {
+    public ArrayService(final Repository<String, Integer> repository) {
         this.repository = repository;
     }
 }
