@@ -1,0 +1,12 @@
+Class: ListRepository, 
+Method: [public void com.prodius.module3.lesson16hw.repository.ListRepository.remove(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ListRepository.add(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ListRepository.set(java.lang.Object,java.lang.Object), void com.prodius.module3.lesson16hw.repository.ListRepository.addIndex(java.lang.Object,java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ListRepository.show()], 
+Parameters: [T]
+
+Class: ArrayRepository, 
+Method: [public void com.prodius.module3.lesson16hw.repository.ArrayRepository.remove(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ArrayRepository.add(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ArrayRepository.set(java.lang.Object,java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ArrayRepository.addIndex(java.lang.Object,java.lang.Object), public void com.prodius.module3.lesson16hw.repository.ArrayRepository.show()], 
+Parameters: [T]
+
+Class: MapRepository, 
+Method: [public void com.prodius.module3.lesson16hw.repository.MapRepository.remove(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.MapRepository.add(java.lang.Object), public void com.prodius.module3.lesson16hw.repository.MapRepository.set(java.lang.Object,java.lang.Object), public void com.prodius.module3.lesson16hw.repository.MapRepository.addIndex(java.lang.Object,java.lang.Object), public void com.prodius.module3.lesson16hw.repository.MapRepository.show()], 
+Parameters: [K, V]
+
