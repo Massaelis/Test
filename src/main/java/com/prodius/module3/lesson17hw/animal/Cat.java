@@ -8,14 +8,15 @@ import lombok.ToString;
 public class Cat extends Animal {
     public final String name;
     private final int age;
-    public Cat(String name, int age){
+
+    public Cat(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
     @Override
     public void move() {
-        System.out.println("Cat " + getName()+ " move");
+        System.out.println("Cat " + getName() + " move");
     }
 
     @Override
