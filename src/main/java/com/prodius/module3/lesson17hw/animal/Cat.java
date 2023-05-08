@@ -1,17 +1,11 @@
 package com.prodius.module3.lesson17hw.animal;
 
-import lombok.Getter;
 import lombok.ToString;
 
-@ToString
-@Getter
+@ToString(callSuper = true)
 public class Cat extends Animal {
-    public final String name;
-    private final int age;
-
     public Cat(String name, int age) {
-        this.name = name;
-        this.age = age;
+        super(name, age);
     }
 
     @Override
