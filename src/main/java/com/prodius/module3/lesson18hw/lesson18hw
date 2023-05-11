@@ -56,3 +56,17 @@ SELECT name, continent, population FROM world
 2~ Large Countries
 SELECT name FROM world
 WHERE population > 200000000
+
+
+SELECT g.id, count(student.id) as studentCount FROM Group g
+LEFT JOIN Student ON g.id = student.group_id
+
+SELECT * FROM Group g
+LEFT JOIN Student ON g.group_id = student.group_id
+-- result table
+g.group_id, g.name, student.id, student.name, student.group_id
+
+SELECT * FROM Group g
+LEFT JOIN Student USING (group_id)
+-- result table
+group_id, g.name, student.id, student.name
