@@ -1,0 +1,146 @@
+~~~Group By
+~MEDIUM
+1.Show unique first names from the patients table which only occurs once in the list.
+  For example, if two or more people are named 'John' in the first_name column then don't include
+  their name in the output list. If only 1 person is named 'Leo' then include them in the output.
+
+  SELECT first_name
+  FROM patients
+  GROUP BY first_name
+  HAVING COUNT (first_name) = 1
+
+2.Show patient_id, diagnosis from admissions. Find patients admitted multiple times for the same diagnosis.
+
+  SELECT patient_id, diagnosis
+  FROM admissions
+  GROUP BY patient_id, diagnosis
+  HAVING COUNT (*) > 1
+
+~~~HAVING
+~MEDIUM
+1.Show the province_id(s), sum of height; where the total sum of its patient's height is greater than or equal to 7,000.
+
+  SELECT
+    province_id,
+    sum(height) as sum_height
+  FROM patients
+  GROUP BY province_id
+  HAVING sum_height >= 7000
+
+~~~JOIN
+~MEDIUM
+1.Display the total amount of patients for each province. Order by descending.
+
+  SELECT
+    province_name,
+    count(patient_id) AS patient_count
+  FROM patients
+  INNER JOIN province_names ON province_names.province_id = patients.province_id
+  GROUP BY province_name
+  ORDER BY count(patient_id) DESC
+
+2.For every admission, display the patient's full name, their admission diagnosis,
+  and their doctor's full name who diagnosed their problem.
+
+  SELECT
+    CONCAT(
+      patients.first_name,
+      ' ',
+      patients.last_name
+    ) AS patient_name,
+    diagnosis,
+    CONCAT(
+      doctors.first_name,
+      ' ',
+      doctors.last_name
+    ) AS doctor_name
+  from patients
+    join admissions On admissions.patient_id = patients.patient_id
+    join doctors On admissions.attending_doctor_id = doctors.doctor_id
+
+3.Show patient_id, first_name, last_name from patients whos diagnosis is 'Dementia'.
+  Primary diagnosis is stored in the admissions table.
+
+  SELECT
+    patients.patient_id,
+    first_name,
+    last_name
+  from patients
+    join admissions ON admissions.patient_id = patients.patient_id
+  where diagnosis in ('Dementia')
+
+~~~NULL
+~MEDIUM
+1.Show all allergies ordered by popularity. Remove NULL values from query.
+
+SELECT allergies, COUNT( patient_id) as total_diagnosis
+FROM patients
+where allergies is not null
+GROUP BY allergies
+ORDER BY total_diagnosis DESC
+
+~~~UNION
+~EASY
+1.Show first name and last name of patients who does not have allergies. (null)
+
+  SELECT first_name, last_name
+  FROM patients
+  WHERE allergies IS NULL
+
+2.Write a query to find list of patients first_name, last_name,
+  and allergies from Hamilton where allergies are not null
+
+  SELECT first_name, last_name, allergies
+  FROM patients
+  WHERE
+    city = 'Hamilton'
+    AND allergies IS NOT NULL
+
+~MEDIUM
+1.Show first name, last name and role of every person that is either patient or doctor.
+  The roles are either "Patient" or "Doctor"
+
+  SELECT first_name, last_name, 'Patient' AS role
+  FROM patients
+  UNION ALL
+  SELECT first_name, last_name, 'Doctor' AS role
+  FROM doctors
+
+~~~COUNT
+~MEDIUM
+1.display the number of duplicate patients based on their first_name and last_name.
+
+  SELECT
+    first_name,
+    last_name,
+    count (*) as num_of_duplicates
+  FROM patients
+  GROUP BY
+    first_name,
+    last_name
+  HAVING COUNT (*) > 1
+
+~~~IN
+~MEDIUM
+1.Show first and last name, allergies from patients which have allergies to either 'Penicillin' or 'Morphine'.
+  Show results ordered ascending by allergies then by first_name then by last_name.
+
+  SELECT first_name, last_name, allergies
+  FROM patients
+  WHERE allergies IN ('Penicillin', 'Morphine')
+  ORDER BY allergies, first_name, last_name
+
+2.Show patient_id, attending_doctor_id, and diagnosis for admissions that match one of the two criteria:
+  1. patient_id is an odd number and attending_doctor_id is either 1, 5, or 19.
+  2. attending_doctor_id contains a 2 and the length of patient_id is 3 characters.
+
+  SELECT patient_id, attending_doctor_id, diagnosis
+  FROM admissions
+  WHERE (
+    patient_id % 2!=0
+    AND attending_doctor_id IN (1,5,19)
+  )
+  OR (
+    attending_doctor_id LIKE '%2%'
+    AND LENGTH( patient_id) = 3
+  )
