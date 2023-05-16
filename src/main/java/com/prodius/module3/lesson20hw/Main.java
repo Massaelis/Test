@@ -3,8 +3,9 @@ package com.prodius.module3.lesson20hw;
 import java.sql.*;
 
 public class Main {
+    final static Connection connection = DatabaseUtil.getConnection();
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        final Connection connection = DatabaseUtil.getConnection();
+
 
         String student = "CREATE TABLE student " +
                 " (id_group TEXT PRIMARY KEY, " +
@@ -40,17 +41,17 @@ public class Main {
                 " grade VARCHAR CHECK\n" +
                 "       (grade = 'completed' or grade = 'process'))";
 
-        createTable(connection, student);
-        createTable(connection, faculty);
-        createTable(connection, course);
-        createTable(connection, results_exam);
-        createTable(connection, offsets);
+        createTable( student);
+        createTable( faculty);
+        createTable( course);
+        createTable( results_exam);
+        createTable( offsets);
 
         connection.close();
 
     }
 
-    private static void createTable(final Connection connection, final String sql) throws SQLException {
+    private static void createTable( final String sql) throws SQLException {
         Statement statement = null;
 
         System.out.println("Creating table in selected database...");
