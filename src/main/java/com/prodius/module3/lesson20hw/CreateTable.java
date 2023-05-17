@@ -5,26 +5,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateTable {
-    public static void createTable() {
+    public void createTable() {
         try (final Connection connection = DatabaseUtil.getConnection()) {
             connection.setAutoCommit(false);
 
             createFaculty(connection);
             createStudent(connection);
             createCourse(connection);
-            createResults_exam(connection);
+            createResultsExam(connection);
             createOffsets(connection);
 
             connection.commit();
-            connection.close();
-
             System.out.println("All table successfully created...");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void createStudent(final Connection connection) throws SQLException {
+    private void createStudent(final Connection connection) throws SQLException {
         System.out.println("Creating table in selected database...");
         final Statement statement = connection.createStatement();
 
@@ -41,7 +39,7 @@ public class CreateTable {
         System.out.println("Table successfully created...");
     }
 
-    private static void createCourse(final Connection connection) throws SQLException {
+    private void createCourse(final Connection connection) throws SQLException {
 
         System.out.println("Creating table in selected database...");
         final Statement statement = connection.createStatement();
@@ -58,7 +56,7 @@ public class CreateTable {
         System.out.println("Table course created...");
     }
 
-    private static void createFaculty(final Connection connection) throws SQLException {
+    private void createFaculty(final Connection connection) throws SQLException {
         System.out.println("Creating table in selected database...");
         final Statement statement = connection.createStatement();
 
@@ -71,7 +69,7 @@ public class CreateTable {
         System.out.println("Table faculty created...");
     }
 
-    private static void createResults_exam(final Connection connection) throws SQLException {
+    private void createResultsExam(final Connection connection) throws SQLException {
         System.out.println("Creating table in selected database...");
         final Statement statement = connection.createStatement();
 
@@ -89,7 +87,7 @@ public class CreateTable {
         System.out.println("Table results_exam created...");
     }
 
-    private static void createOffsets(final Connection connection) throws SQLException {
+    private void createOffsets(final Connection connection) throws SQLException {
         System.out.println("Creating table in selected database...");
         final Statement statement = connection.createStatement();
 
