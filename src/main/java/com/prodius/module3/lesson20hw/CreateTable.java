@@ -76,10 +76,10 @@ public class CreateTable {
         String results_exam = "CREATE TABLE IF NOT EXISTS results_exam " +
                 " (id_results_exam TEXT PRIMARY KEY, " +
                 " id_student TEXT, " +
-                " id_group TEXT, " +
+                " id_course TEXT, " +
                 " date_exam DATE, " +
                 " FOREIGN KEY (id_student) REFERENCES student(id), " +
-                " FOREIGN KEY (id_group) REFERENCES course(id), " +
+                " FOREIGN KEY (id_course) REFERENCES course(id), " +
                 " grade INTEGER CHECK\n" +
                 "       (grade > -1 and grade < 11))";
 
@@ -94,10 +94,10 @@ public class CreateTable {
         String offsets = "CREATE TABLE IF NOT EXISTS offsets " +
                 " (id_offsets TEXT PRIMARY KEY, " +
                 " id_student TEXT, " +
-                " id_group TEXT, " +
+                " id_course TEXT, " +
                 " date_offsets DATE, " +
                 " FOREIGN KEY (id_student) REFERENCES student(id), " +
-                " FOREIGN KEY (id_group) REFERENCES course(id), " +
+                " FOREIGN KEY (id_course) REFERENCES course(id), " +
                 " grade VARCHAR CHECK\n" +
                 "       (grade = 'completed' or grade = 'process'))";
 

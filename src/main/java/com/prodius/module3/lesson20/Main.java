@@ -1,25 +1,116 @@
 package com.prodius.module3.lesson20;
 
+import lombok.SneakyThrows;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 public class Main {
+
+    private static final Function<ResultSet, Student> STUDENT_MAPPER = resultSet -> {
+        try {
+            final String id = resultSet.getString("id");
+            final Student student = new Student(id);
+            student.setName(resultSet.getString("name"));
+            student.setAge(resultSet.getInt("age"));
+            return student;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    };
+
+    private static final Function<ResultSet, Student> STUDENT_MAPPER2 = Main::map;
 
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
         try (final Connection connection = DatabaseUtil.getConnection()) {
-            workWithStatement(connection);
-            workWithPrepareStatement(connection);
+//            workWithStatement(connection);
+//            workWithPrepareStatement(connection);
+            workWithData();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        workWithPrepareStatementTransaction();
+//        workWithPrepareStatementTransaction();
+    }
+
+    private static void workWithData() {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            final Student student = new Student();
+            System.out.println("Write student name");
+            student.setName(reader.readLine());
+            System.out.println("Write student age");
+            student.setAge(Integer.parseInt(reader.readLine()));
+
+            save(student);
+
+            printAllStudents();
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static void printAllStudents() throws SQLException {
+        try (
+                final Connection connection = DatabaseUtil.getConnection();
+                final Statement statement = connection.createStatement()
+        ) {
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Students\" ORDER BY age DESC");
+
+            final List<Student> students = new LinkedList<>();
+
+            while (resultSet.next()) {
+                final Student student0 = map(resultSet);
+                students.add(student0);
+
+                final Student student1 = STUDENT_MAPPER.apply(resultSet);
+                students.add(student1);
+
+                final Student student2 = STUDENT_MAPPER2.apply(resultSet);
+                students.add(student2);
+
+                final Student student3 = Mapper.getMapper().apply(resultSet);
+                students.add(student3);
+            }
+
+            students.forEach(System.out::println);
+        }
+    }
+
+    @SneakyThrows
+    private static Student map(final ResultSet resultSet) {
+        final String id = resultSet.getString("id");
+        final Student student = new Student(id);
+        student.setName(resultSet.getString("name"));
+        student.setAge(resultSet.getInt("age"));
+        return student;
+    }
+
+    private static void save(final Student student) throws SQLException {
+        final String query = "INSERT INTO \"Students\"(id, name, age) VALUES(?, ?, ?)";
+
+        try (
+                final Connection connection = DatabaseUtil.getConnection();
+                final PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            preparedStatement.setString(1, student.getId());
+            preparedStatement.setString(2, student.getName());
+            preparedStatement.setInt(3, student.getAge());
+            final int execute = preparedStatement.executeUpdate();
+            System.out.println("Student saved: " + (execute == 1));
+        }
     }
 
     private static void workWithPrepareStatementTransaction() {
