@@ -17,4 +17,3 @@ public class DatabaseUtil {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 }
-
