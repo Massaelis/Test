@@ -1,4 +1,6 @@
-package com.prodius.module3.lesson20hw;
+package com.prodius.module3.lesson20hw.createTable;
+
+import com.prodius.module3.lesson20hw.DatabaseUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;

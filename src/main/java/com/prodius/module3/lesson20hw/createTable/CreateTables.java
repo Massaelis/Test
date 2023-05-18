@@ -1,4 +1,4 @@
-package com.prodius.module3.lesson20hw;
+package com.prodius.module3.lesson20hw.createTable;
 
 
 import lombok.Getter;

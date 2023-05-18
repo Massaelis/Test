@@ -10,7 +10,7 @@ public class DatabaseUtil {
 
     private static final String USERNAME = "postgres";
 
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "route";
 
     @SneakyThrows
     public static Connection getConnection() {
