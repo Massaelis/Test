@@ -1,0 +1,44 @@
+student
+id, name, surname, date, email, id_faculty
+86f76591-ce83-4212-9fb5-4bed6cd28440,Gillie,Whitehorne,6/20/1995,gwhitehorne0@slashdot.org,ab18d8c9-7902-449a-8d19-48a84d51478c
+e635eb5b-b37c-42a4-b7f8-45b7afa8ce69,Renaldo,Webberley,3/4/1999,rwebberley1@squidoo.com,24f733d6-c1d2-4c1f-beb5-bbf689ee7267
+df1887b3-1456-4d8a-bea9-656c384db0ea,Malvina,Samuels,11/24/1990,msamuels2@nytimes.com,ab18d8c9-7902-449a-8d19-48a84d51478c
+e4e76ac3-8ab6-4f58-94e0-409cdc2a5031,Broddy,Shout,10/2/1995,bshout3@opera.com,24f733d6-c1d2-4c1f-beb5-bbf689ee7267
+b76a9c6f-ff42-40f0-b3cd-765a138aa785,Brendan,Fair,7/28/1998,bfair4@cloudflare.com,ab18d8c9-7902-449a-8d19-48a84d51478c
+163c6ac5-5a4c-494e-84b3-6073ba45be43,Robyn,Schapiro,11/12/1992,rschapiro5@china.com,81d4135a-cf0b-4c30-9cba-97339de9cab6
+119c501c-e725-4e6a-ab52-2baba4832ea9,Alonzo,Stiggers,3/24/1996,astiggers6@angelfire.com,81d4135a-cf0b-4c30-9cba-97339de9cab6
+606fdc5b-ce44-4709-9675-963bf8d1b20a,Jerrylee,Stuehmeyer,12/10/1991,jstuehmeyer7@jigsy.com,ce6123fa-d9c4-4af3-9a67-301b4091ea09
+2b0b5c51-a67d-4f23-a437-6329cc955c8b,Barbara-anne,Cullin,1/29/1999,bcullin8@scribd.com,ab18d8c9-7902-449a-8d19-48a84d51478c
+24cba5c4-fedd-438d-896b-7a1084fef243,Rudolfo,Saynor,4/13/1991,rsaynor9@domainmarket.com,81d4135a-cf0b-4c30-9cba-97339de9cab6
+
+course
+id, group_name, date_start, date_end, id_faculty
+610ee8a1-9070-4e2c-b45e-bf7d7a5739e2,Wrapsafe,24-May-2023,04-Jun-2023,ab18d8c9-7902-449a-8d19-48a84d51478c
+6a2bce0a-e1b7-4378-8241-75e25d941102,Fix San,24-Dec-2023,22-Oct-2023,81d4135a-cf0b-4c30-9cba-97339de9cab6
+d75dba63-1980-472e-9d2e-0d3682a09335,Pannier,07-May-2023,15-Nov-2023,24f733d6-c1d2-4c1f-beb5-bbf689ee7267
+2142e62a-678f-42ee-87c6-01f9fa1fbf42,Lotstring,26-Nov-2023,29-May-2023,ce6123fa-d9c4-4af3-9a67-301b4091ea09
+
+faculty
+id, faculty_name, dean
+ab18d8c9-7902-449a-8d19-48a84d51478c,Lotstring,Judas Stair
+24f733d6-c1d2-4c1f-beb5-bbf689ee7267,Sonsing,Cello Bottlestone
+81d4135a-cf0b-4c30-9cba-97339de9cab6,Sonair,Kellia Clowney
+ce6123fa-d9c4-4af3-9a67-301b4091ea09,Zathin,Caryl Shotboult
+
+results_exam
+id_results_exam, id_student, id_course, date_exam, grade
+c76325d9-b425-4e8a-9056-9c2fa3baebf1,86f76591-ce83-4212-9fb5-4bed6cd28440,610ee8a1-9070-4e2c-b45e-bf7d7a5739e2,2023-04-09T09:38:14Z,8
+d25315fd-6bfb-41f5-9fb5-0b5acf6c15ee,606fdc5b-ce44-4709-9675-963bf8d1b20a,6a2bce0a-e1b7-4378-8241-75e25d941102,2023-01-04T15:04:06Z,10
+51d8ad64-6874-486c-95c8-81b8079430e4,2b0b5c51-a67d-4f23-a437-6329cc955c8b,6a2bce0a-e1b7-4378-8241-75e25d941102,2022-08-13T14:16:24Z,9
+013431a6-247d-4915-b1b0-38e9d647c43d,2b0b5c51-a67d-4f23-a437-6329cc955c8b,2142e62a-678f-42ee-87c6-01f9fa1fbf42,2022-07-14T00:32:14Z,5
+cd0828c6-7707-4f2c-b220-322d73db5362,e4e76ac3-8ab6-4f58-94e0-409cdc2a5031,d75dba63-1980-472e-9d2e-0d3682a09335,2023-04-09T15:13:28Z,7
+04c99f5f-001e-4e75-824e-6b412687519e,24cba5c4-fedd-438d-896b-7a1084fef243,2142e62a-678f-42ee-87c6-01f9fa1fbf42,2023-02-02T20:35:13Z,9
+
+offsets
+id_offsets, id_student, id_course, date_offsets, grade
+a3be8ef1-4f60-44de-b281-266138486abf,86f76591-ce83-4212-9fb5-4bed6cd28440,610ee8a1-9070-4e2c-b45e-bf7d7a5739e2,2023-03-31T00:29:11Z,completed
+e4698a9c-545e-4cfe-ad59-2efafd6a5031,24cba5c4-fedd-438d-896b-7a1084fef243,6a2bce0a-e1b7-4378-8241-75e25d941102,2023-04-04T16:56:26Z,process
+cb1b17a0-4e92-41e8-8e91-2975c0fde6f0,119c501c-e725-4e6a-ab52-2baba4832ea9,d75dba63-1980-472e-9d2e-0d3682a09335,2023-03-06T22:51:30Z,completed
+98340fb9-16d9-4ced-aac7-eba57e18f066,b76a9c6f-ff42-40f0-b3cd-765a138aa785,2142e62a-678f-42ee-87c6-01f9fa1fbf42,2022-10-05T05:19:07Z,process
+4ae194a9-69f6-4354-a30e-f1940c52195a,86f76591-ce83-4212-9fb5-4bed6cd28440,d75dba63-1980-472e-9d2e-0d3682a09335,2022-10-02T17:01:10Z,completed
+a538842d-7a6a-4ecf-98cc-614d1a151424,b76a9c6f-ff42-40f0-b3cd-765a138aa785,2142e62a-678f-42ee-87c6-01f9fa1fbf42,2023-04-16T23:39:23Z,completed
