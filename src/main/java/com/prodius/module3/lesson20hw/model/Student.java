@@ -15,14 +15,14 @@ public class Student {
     private final String surname;
     private final Date date;
     private final String email;
-    private final String id_faculty;
+    private final String idFaculty;
 
-    public Student(String id, String name, String surname, Date date, String email, String id_faculty) {
+    public Student(String id, String name, String surname, Date date, String email, String idFaculty) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.date = date;
         this.email = email;
-        this.id_faculty = id_faculty;
+        this.idFaculty = idFaculty;
     }
 }

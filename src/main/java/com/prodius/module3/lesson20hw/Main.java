@@ -1,15 +1,9 @@
 package com.prodius.module3.lesson20hw;
 
-import com.prodius.module3.lesson20hw.controller.CourseController;
-import com.prodius.module3.lesson20hw.controller.FacultyController;
-import com.prodius.module3.lesson20hw.createTable.CreateTable;
-import com.prodius.module3.lesson20hw.model.Course;
-import com.prodius.module3.lesson20hw.model.Faculty;
-import com.prodius.module3.lesson20hw.repository.CourseRepository;
-import com.prodius.module3.lesson20hw.repository.Crud;
-import com.prodius.module3.lesson20hw.repository.FacultyRepository;
-import com.prodius.module3.lesson20hw.services.CourseServices;
-import com.prodius.module3.lesson20hw.services.FacultyServices;
+import com.prodius.module3.lesson20hw.controller.*;
+import com.prodius.module3.lesson20hw.model.*;
+import com.prodius.module3.lesson20hw.repository.*;
+import com.prodius.module3.lesson20hw.services.*;
 
 
 import java.sql.SQLException;
@@ -31,7 +25,28 @@ public class Main {
         final CourseServices courseServices = new CourseServices(courseRepository);
         final CourseController courseController = new CourseController(courseServices);
 
-        courseController.createFacultyFromFile();
-        courseController.printAll();
+//        courseController.createFacultyFromFile();
+//        courseController.printAll();
+
+        final Crud<Student, String> studentRepository = new StudentRepository();
+        final StudentServices studentServices = new StudentServices(studentRepository);
+        final StudentController studentController = new StudentController(studentServices);
+
+//        studentController.createFacultyFromFile();
+//        studentController.printAll();
+
+        final Crud<Offsets, String> offsetsRepository = new OffsetsRepository();
+        final OffsetsServices offsetsServices = new OffsetsServices(offsetsRepository);
+        final OffsetsController offsetsController = new OffsetsController(offsetsServices);
+
+//        offsetsController.createFacultyFromFile();
+//        offsetsController.printAll();
+
+        final Crud<ResultsExam, String> resultsExamRepository = new ResultsExamRepository();
+        final ResultsExamServices resultsExamServices = new ResultsExamServices(resultsExamRepository);
+        final ResultsExamController resultsExamController = new ResultsExamController(resultsExamServices);
+
+//        resultsExamController.createFacultyFromFile();
+        resultsExamController.printAll();
     }
 }

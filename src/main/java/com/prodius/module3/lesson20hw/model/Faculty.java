@@ -10,12 +10,12 @@ import lombok.ToString;
 public class Faculty {
     //id, faculty_name, dean
     private final String id;
-    private final String faculty_name;
+    private final String facultyName;
     private final String dean;
 
-    public Faculty(String id, String faculty_name, String dean) {
+    public Faculty(String id, String facultyName, String dean) {
         this.id = id;
-        this.faculty_name = faculty_name;
+        this.facultyName = facultyName;
         this.dean = dean;
     }
 }

@@ -10,7 +10,7 @@ public class CourseServices {
         this.courseRepository = courseRepository;
     }
 
-    public void save(final Course course){
+    public void save(final Course course) {
         courseRepository.save(course);
     }
 

@@ -11,8 +11,6 @@ public class FacultyController {
     public FacultyController(FacultyServices facultyServices) {
         this.facultyServices = facultyServices;
     }
-
-
     private static final String FACULTY_FILE = "src/main/java/com/prodius/module3/lesson20hw/txt/faculty";
 
     public void createFacultyFromFile() {
@@ -20,7 +18,6 @@ public class FacultyController {
             String line;
             while ((line = reader.readLine()) != null) {
                 final String[] parts = line.split(",");
-                //id, faculty_name, dean
                 final String id = parts[0];
                 final String faculty_name = parts[1];
                 final String dean = parts[2];
@@ -36,7 +33,6 @@ public class FacultyController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void printAll() {
