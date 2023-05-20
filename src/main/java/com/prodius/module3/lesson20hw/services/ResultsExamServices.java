@@ -2,11 +2,12 @@ package com.prodius.module3.lesson20hw.services;
 
 import com.prodius.module3.lesson20hw.model.ResultsExam;
 import com.prodius.module3.lesson20hw.repository.Crud;
+import com.prodius.module3.lesson20hw.repository.ResultsExamRepository;
 
 public class ResultsExamServices {
-    private final Crud<ResultsExam, String> resultsExamRepository;
+    private final ResultsExamRepository resultsExamRepository;
 
-    public ResultsExamServices(Crud<ResultsExam, String> resultsExamRepository) {
+    public ResultsExamServices(ResultsExamRepository resultsExamRepository) {
         this.resultsExamRepository = resultsExamRepository;
     }
 
@@ -16,5 +17,9 @@ public class ResultsExamServices {
 
     public void printAll() {
         resultsExamRepository.getAll().forEach(System.out::println);
+    }
+
+    public void getHighGrade() {
+        resultsExamRepository.getHighGrade().forEach(System.out::println);
     }
 }

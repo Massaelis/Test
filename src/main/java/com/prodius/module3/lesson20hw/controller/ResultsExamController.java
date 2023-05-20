@@ -52,4 +52,7 @@ public class ResultsExamController {
     public void printAll() {
         resultsExamServices.printAll();
     }
+    public void getHighGrade() {
+        resultsExamServices.getHighGrade();
+    }
 }

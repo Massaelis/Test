@@ -50,4 +50,7 @@ public class OffsetsController {
     public void printAll() {
         offsetsServices.printAll();
     }
+    public void getCompletedOffset() {
+        offsetsServices.getCompletedOffset();
+    }
 }

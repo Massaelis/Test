@@ -35,18 +35,42 @@ public class Main {
 //        studentController.createFacultyFromFile();
 //        studentController.printAll();
 
-        final Crud<Offsets, String> offsetsRepository = new OffsetsRepository();
+        final OffsetsRepository offsetsRepository = new OffsetsRepository();
         final OffsetsServices offsetsServices = new OffsetsServices(offsetsRepository);
         final OffsetsController offsetsController = new OffsetsController(offsetsServices);
 
 //        offsetsController.createFacultyFromFile();
 //        offsetsController.printAll();
+//        System.out.println();
+//        offsetsController.getCompletedOffset();
 
-        final Crud<ResultsExam, String> resultsExamRepository = new ResultsExamRepository();
+        final ResultsExamRepository resultsExamRepository = new ResultsExamRepository();
         final ResultsExamServices resultsExamServices = new ResultsExamServices(resultsExamRepository);
         final ResultsExamController resultsExamController = new ResultsExamController(resultsExamServices);
 
 //        resultsExamController.createFacultyFromFile();
-        resultsExamController.printAll();
+//        resultsExamController.printAll();
+//        System.out.println();
+//        resultsExamController.getHighGrade();
     }
+
+    /*
+    Показать факультеты на которых учиться более одного студента
+
+    SELECT faculty_name FROM faculty
+        join student On faculty.id = student.id_faculty
+        GROUP BY faculty_name
+        HAVING COUNT (id_faculty) > 1
+
+    Показать название факультета и кол-во курсов на нем
+
+    SELECT faculty.faculty_name, course.group_name FROM course
+        join faculty On faculty.id = course.id_faculty
+
+    Показать название курса, оценку по этому курсу, данные про студента
+
+    SELECT student.*, course.group_name, results_exam.grade FROM course
+        join results_exam On results_exam.id_group = course.id
+        join student On results_exam.id_student = student.id
+     */
 }

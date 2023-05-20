@@ -47,4 +47,22 @@ public class ResultsExamRepository implements Crud<ResultsExam, String> {
         }
         return resultsExams;
     }
+
+    public Set<ResultsExam> getHighGrade() {
+        final Set<ResultsExam> resultsExams = new LinkedHashSet<>();
+        try (
+                final Connection connection = getConnection();
+                final Statement statement = connection.createStatement()
+        ) {
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM results_exam\n" +
+                    "WHERE grade IN ('9', '10');");
+            while (resultSet.next()) {
+                final ResultsExam resultsExam = ResultsExamMapper.getMapper().apply(resultSet);
+                resultsExams.add(resultsExam);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return resultsExams;
+    }
 }

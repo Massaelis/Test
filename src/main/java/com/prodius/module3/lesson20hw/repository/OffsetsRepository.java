@@ -48,4 +48,22 @@ public class OffsetsRepository implements Crud<Offsets, String> {
         }
         return offsets;
     }
+
+    public Set<Offsets> getCompletedOffset() {
+        final Set<Offsets> offsets = new LinkedHashSet<>();
+        try (
+                final Connection connection = getConnection();
+                final Statement statement = connection.createStatement()
+        ) {
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM offsets\n" +
+                    "WHERE (grade = 'completed');");
+            while (resultSet.next()) {
+                final Offsets offset = OffsetsMapper.getMapper().apply(resultSet);
+                offsets.add(offset);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return offsets;
+    }
 }

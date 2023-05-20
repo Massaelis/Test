@@ -1,12 +1,12 @@
 package com.prodius.module3.lesson20hw.services;
 
 import com.prodius.module3.lesson20hw.model.Offsets;
-import com.prodius.module3.lesson20hw.repository.Crud;
+import com.prodius.module3.lesson20hw.repository.OffsetsRepository;
 
 public class OffsetsServices {
-    private final Crud<Offsets, String> offsetsRepository;
+    private final OffsetsRepository offsetsRepository;
 
-    public OffsetsServices(Crud<Offsets, String> offsetsRepository) {
+    public OffsetsServices(OffsetsRepository offsetsRepository) {
         this.offsetsRepository = offsetsRepository;
     }
 
@@ -16,5 +16,9 @@ public class OffsetsServices {
 
     public void printAll() {
         offsetsRepository.getAll().forEach(System.out::println);
+    }
+
+    public void getCompletedOffset() {
+        offsetsRepository.getCompletedOffset().forEach(System.out::println);
     }
 }
