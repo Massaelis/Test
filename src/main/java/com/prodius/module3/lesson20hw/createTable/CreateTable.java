@@ -55,7 +55,7 @@ public class CreateTable {
                 " FOREIGN KEY (id_faculty) REFERENCES faculty(id))";
 
         statement.executeUpdate(course);
-        System.out.println("Table course created...");
+        System.out.println("Table course.csv created...");
     }
 
     private void createFaculty(final Connection connection) throws SQLException {
@@ -68,7 +68,7 @@ public class CreateTable {
                 " dean VARCHAR(100))";
 
         statement.executeUpdate(faculty);
-        System.out.println("Table faculty created...");
+        System.out.println("Table faculty.csv created...");
     }
 
     private void createResultsExam(final Connection connection) throws SQLException {
@@ -86,7 +86,7 @@ public class CreateTable {
                 "       (grade > -1 and grade < 11))";
 
         statement.executeUpdate(results_exam);
-        System.out.println("Table results_exam created...");
+        System.out.println("Table results_exam.csv created...");
     }
 
     private void createOffsets(final Connection connection) throws SQLException {
@@ -104,6 +104,6 @@ public class CreateTable {
                 "       (grade = 'completed' or grade = 'process'))";
 
         statement.executeUpdate(offsets);
-        System.out.println("Table offsets created...");
+        System.out.println("Table offsets.csv created...");
     }
 }

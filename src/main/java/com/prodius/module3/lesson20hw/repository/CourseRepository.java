@@ -3,7 +3,11 @@ package com.prodius.module3.lesson20hw.repository;
 import com.prodius.module3.lesson20hw.mapper.CourseMapper;
 import com.prodius.module3.lesson20hw.model.Course;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,7 +27,7 @@ public class CourseRepository implements Crud<Course, String> {
             preparedStatement.setString(2, course.getGroupName());
             preparedStatement.setDate(3, course.getDateStart());
             preparedStatement.setDate(4, course.getDateEnd());
-            preparedStatement.setString(5, course.getIdFaculty());
+            preparedStatement.setString(5, course.getFacultyId());
             final int execute = preparedStatement.executeUpdate();
             System.out.println("Course saved: " + (execute == 1));
         } catch (SQLException e) {
@@ -47,5 +51,23 @@ public class CourseRepository implements Crud<Course, String> {
             throw new RuntimeException(e);
         }
         return courses;
+    }
+
+    public Set<Object> getDataAboutCourse() { // TODO: 20/05/23
+        final Set<Object> objects = new LinkedHashSet<>();
+        try (
+                final Connection connection = getConnection();
+                final Statement statement = connection.createStatement()
+        ) {
+            final ResultSet resultSet = statement.executeQuery("SELECT student.*, course.group_name, results_exam.grade FROM course\n"
+                    + "        join results_exam On results_exam.id_course = course.id\n"
+                    + "        join student On results_exam.id_student = student.id");
+            while (resultSet.next()) {
+                System.out.println(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return objects;
     }
 }

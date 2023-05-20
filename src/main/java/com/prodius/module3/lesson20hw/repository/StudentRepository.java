@@ -3,7 +3,12 @@ package com.prodius.module3.lesson20hw.repository;
 import com.prodius.module3.lesson20hw.mapper.StudentMapper;
 import com.prodius.module3.lesson20hw.model.Student;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,7 +29,7 @@ public class StudentRepository implements Crud<Student, String> {
             preparedStatement.setString(3, student.getSurname());
             preparedStatement.setDate(4, (Date) student.getDate());
             preparedStatement.setString(5, student.getEmail());
-            preparedStatement.setString(6, student.getIdFaculty());
+            preparedStatement.setString(6, student.getFacultyId());
             final int execute = preparedStatement.executeUpdate();
             System.out.println("Student saved: " + (execute == 1));
         } catch (SQLException e) {

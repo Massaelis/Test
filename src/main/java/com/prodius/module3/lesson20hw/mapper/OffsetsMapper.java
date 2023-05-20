@@ -25,6 +25,6 @@ public class OffsetsMapper {
         final Date dateOffsets = (resultSet.getDate("date_offsets"));
         final String grade = resultSet.getString("grade");
 
-        return new Offsets(idOffsets, idStudent, idCourse, dateOffsets, grade);
+        return new Offsets(idOffsets, null, idStudent, null, idCourse, dateOffsets, grade);
     }
 }

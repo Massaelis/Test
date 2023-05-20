@@ -6,10 +6,14 @@ import java.util.Set;
 public interface Crud<T, K> {
     void save(T value);
 
-//    T getById(K id);
+    default T getById(K id) {
+        throw new UnsupportedOperationException("Not supported");
+    }
 
     Set<T> getAll();
 
-//    void delete(K id);
+    default void delete(K id) {
+        throw new UnsupportedOperationException("Not supported");
+    }
 
 }

@@ -19,9 +19,9 @@ public class StudentController {
     public void createStudent() {
         try {
             final Student student = new Student();
-            System.out.println("Write student name");
+            System.out.println("Write student.csv name");
             student.setName(reader.readLine());
-            System.out.println("Write student age");
+            System.out.println("Write student.csv age");
             student.setAge(Integer.parseInt(reader.readLine()));
 
             studentService.save(student);

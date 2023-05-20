@@ -49,9 +49,9 @@ public class Main {
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             final Student student = new Student();
-            System.out.println("Write student name");
+            System.out.println("Write student.csv name");
             student.setName(reader.readLine());
-            System.out.println("Write student age");
+            System.out.println("Write student.csv age");
             student.setAge(Integer.parseInt(reader.readLine()));
 
             save(student);

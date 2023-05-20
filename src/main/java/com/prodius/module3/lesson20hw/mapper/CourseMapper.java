@@ -25,6 +25,6 @@ public class CourseMapper {
         final Date dateEnd = (resultSet.getDate("date_end"));
         final String idFaculty = resultSet.getString("id_faculty");
 
-        return new Course(id, groupName, dateStart, dateEnd, idFaculty);
+        return new Course(id, groupName, dateStart, dateEnd, null, idFaculty);
     }
 }

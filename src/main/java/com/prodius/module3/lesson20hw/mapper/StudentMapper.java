@@ -26,6 +26,6 @@ public class StudentMapper {
         final String email = resultSet.getString("email");
         final String idFaculty = resultSet.getString("id_faculty");
 
-        return new Student(id, name, surname, date, email, idFaculty);
+        return new Student(id, name, surname, date, email, null, idFaculty);
     }
 }

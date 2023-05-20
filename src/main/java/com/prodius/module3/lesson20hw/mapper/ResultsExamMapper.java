@@ -20,10 +20,10 @@ public class ResultsExamMapper {
     private ResultsExam map(final ResultSet resultSet) {
         final String idResultsExam = resultSet.getString("id_results_exam");
         final String idStudent = resultSet.getString("id_student");
-        final String idCourse = resultSet.getString("id_group");
+        final String idCourse = resultSet.getString("id_course");
         final java.sql.Date dateExam = (resultSet.getDate("date_exam"));
         final int grade = resultSet.getInt("grade");
 
-        return new ResultsExam(idResultsExam, idStudent, idCourse, dateExam, grade);
+        return new ResultsExam(idResultsExam, null, idStudent, null, idCourse, dateExam, grade);
     }
 }
