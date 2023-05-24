@@ -30,11 +30,11 @@ public class Main {
         final OffsetsController offsetsController = initOffsetsDomain();
         final ResultsExamController resultsExamController = initResultsExamDomain();
 
-        facultyController.getFacultyWithMoreThen();
+//        facultyController.getFacultyWithMoreThen();
 //        facultyController.getFacultyWithCountCourses();
 //        courseController.getDataAboutCourse();
 //        offsetsController.getCompletedOffset();
-//        resultsExamController.getHighGrade();
+        resultsExamController.getHighGrade();
     }
 
     private static FacultyController initFacultyDomain() {

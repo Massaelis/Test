@@ -1,6 +1,6 @@
 package com.prodius.module3.lesson20hw.repository;
 
-import com.prodius.module3.lesson20hw.join.JoinStudentCourse;
+import com.prodius.module3.lesson20hw.dto.JoinStudentCourse;
 import com.prodius.module3.lesson20hw.mapper.CourseMapper;
 import com.prodius.module3.lesson20hw.model.Course;
 
@@ -61,7 +61,7 @@ public class CourseRepository implements Crud<Course, String> {
                 final Statement statement = connection.createStatement()
         ) {
             final ResultSet resultSet = statement.executeQuery("SELECT student.*, course.group_name, results_exam.grade FROM course\n"
-                    + "        join results_exam On results_exam.id_group = course.id\n"
+                    + "        join results_exam On results_exam.id_course = course.id\n"
                     + "        join student On results_exam.id_student = student.id");
             while (resultSet.next()) {
                 final JoinStudentCourse course = CourseMapper.getMapperJoin().apply(resultSet);

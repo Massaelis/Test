@@ -1,7 +1,7 @@
 package com.prodius.module3.lesson20hw.mapper;
 
-import com.prodius.module3.lesson20hw.join.JoinFacultyCourse;
-import com.prodius.module3.lesson20hw.join.JoinFacultyStudent;
+import com.prodius.module3.lesson20hw.dto.JoinFacultyCourse;
+import com.prodius.module3.lesson20hw.dto.JoinFacultyStudent;
 import com.prodius.module3.lesson20hw.model.Faculty;
 import lombok.SneakyThrows;
 

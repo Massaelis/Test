@@ -1,6 +1,6 @@
 package com.prodius.module3.lesson20hw.services;
 
-import com.prodius.module3.lesson20hw.join.JoinStudentCourse;
+import com.prodius.module3.lesson20hw.dto.JoinStudentCourse;
 import com.prodius.module3.lesson20hw.model.Course;
 import com.prodius.module3.lesson20hw.repository.CourseRepository;
 

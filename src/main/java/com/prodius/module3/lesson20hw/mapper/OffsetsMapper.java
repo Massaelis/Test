@@ -21,7 +21,7 @@ public class OffsetsMapper {
     private Offsets map(final ResultSet resultSet) {
         final String idOffsets = resultSet.getString("id_offsets");
         final String idStudent = resultSet.getString("id_student");
-        final String idCourse = resultSet.getString("id_group");
+        final String idCourse = resultSet.getString("id_course");
         final Date dateOffsets = (resultSet.getDate("date_offsets"));
         final String grade = resultSet.getString("grade");
 

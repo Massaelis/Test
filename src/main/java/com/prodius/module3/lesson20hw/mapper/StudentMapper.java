@@ -1,6 +1,8 @@
 package com.prodius.module3.lesson20hw.mapper;
 
+import com.prodius.module3.lesson20hw.model.Faculty;
 import com.prodius.module3.lesson20hw.model.Student;
+import com.prodius.module3.lesson20hw.repository.FacultyRepository;
 import lombok.SneakyThrows;
 
 import java.sql.Date;
@@ -9,6 +11,8 @@ import java.util.function.Function;
 
 public class StudentMapper {
     private static final StudentMapper STUDENT_MAPPER = new StudentMapper();
+
+    private static final FacultyRepository FACULTY_REPOSITORY = new FacultyRepository();
 
     private StudentMapper() {
     }
@@ -26,6 +30,8 @@ public class StudentMapper {
         final String email = resultSet.getString("email");
         final String idFaculty = resultSet.getString("id_faculty");
 
-        return new Student(id, name, surname, date, email, null, idFaculty);
+        final Faculty faculty = FACULTY_REPOSITORY.getById(idFaculty);
+
+        return new Student(id, name, surname, date, email, faculty, idFaculty);
     }
 }

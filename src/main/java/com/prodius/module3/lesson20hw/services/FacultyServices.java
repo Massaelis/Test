@@ -1,6 +1,6 @@
 package com.prodius.module3.lesson20hw.services;
 
-import com.prodius.module3.lesson20hw.join.JoinFacultyCourse;
+import com.prodius.module3.lesson20hw.dto.JoinFacultyCourse;
 import com.prodius.module3.lesson20hw.model.Faculty;
 import com.prodius.module3.lesson20hw.repository.FacultyRepository;
 
@@ -44,12 +44,9 @@ public class FacultyServices {
         }
     }
 
-    public void printAll() {
-        facultyRepository.getAll().forEach(System.out::println);
-    }
 
     public void getFacultyWithMoreThen(final int studentCount) {
-        facultyRepository.getFacultyWithMoreThen(studentCount);
+        facultyRepository.getFacultyWithMoreThen(studentCount).forEach(System.out::println);
     }
 
     public Set<JoinFacultyCourse> getFacultyWithCountCourses() {

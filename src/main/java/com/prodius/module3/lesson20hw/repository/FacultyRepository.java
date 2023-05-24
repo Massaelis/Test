@@ -1,7 +1,7 @@
 package com.prodius.module3.lesson20hw.repository;
 
-import com.prodius.module3.lesson20hw.join.JoinFacultyCourse;
-import com.prodius.module3.lesson20hw.join.JoinFacultyStudent;
+import com.prodius.module3.lesson20hw.dto.JoinFacultyCourse;
+import com.prodius.module3.lesson20hw.dto.JoinFacultyStudent;
 import com.prodius.module3.lesson20hw.mapper.FacultyMapper;
 import com.prodius.module3.lesson20hw.model.Faculty;
 
@@ -16,6 +16,26 @@ import java.util.Set;
 import static com.prodius.module3.lesson20hw.DatabaseUtil.getConnection;
 
 public class FacultyRepository implements Crud<Faculty, String> {
+
+    @Override
+    public Faculty getById(final String id) {
+        final String query = "SELECT * FROM faculty WHERE id = ?";
+
+        try (
+                final Connection connection = getConnection();
+                final PreparedStatement statement = connection.prepareStatement(query)
+        ) {
+            statement.setString(1, id);
+            final ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return FacultyMapper.getMapper().apply(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
     @Override
     public void save(Faculty faculty) {
         final String query = "INSERT INTO \"faculty\"(id, faculty_name, dean) VALUES(?, ?, ?)";
@@ -51,7 +71,7 @@ public class FacultyRepository implements Crud<Faculty, String> {
         return faculties;
     }
 
-    public Set<JoinFacultyStudent> getFacultyWithMoreThen(final int studentCount) { // TODO: 20/05/23
+    public Set<JoinFacultyStudent> getFacultyWithMoreThen(final int studentCount) {
         final Set<JoinFacultyStudent> faculties = new LinkedHashSet<>();
 
         final String query = "SELECT faculty_name FROM faculty\n"
@@ -68,7 +88,6 @@ public class FacultyRepository implements Crud<Faculty, String> {
             while (resultSet.next()) {
                 final JoinFacultyStudent faculty = FacultyMapper.getMapperJoinStudent().apply(resultSet);
                 faculties.add(faculty);
-//                System.out.println(resultSet.getString("faculty_name"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -91,8 +110,6 @@ public class FacultyRepository implements Crud<Faculty, String> {
             while (resultSet.next()) {
                 final JoinFacultyCourse faculty = FacultyMapper.getMapperJoinCourse().apply(resultSet);
                 faculties.add(faculty);
-//                System.out.println(resultSet.getString("facultyName"));
-//                System.out.println(resultSet.getString("countCourses"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package com.prodius.module3.lesson20hw.repository;
 
 import com.prodius.module3.lesson20hw.mapper.OffsetsMapper;
+import com.prodius.module3.lesson20hw.model.OffsetGrade;
 import com.prodius.module3.lesson20hw.model.Offsets;
 
 import java.sql.Connection;
@@ -56,12 +57,13 @@ public class OffsetsRepository implements Crud<Offsets, String> {
 
     public int getCompletedOffset() {
         final Set<Offsets> offsets = new LinkedHashSet<>();
+        final String query = "SELECT * FROM offsets WHERE (grade = ?)";
         try (
                 final Connection connection = getConnection();
-                final Statement statement = connection.createStatement()
+                final PreparedStatement statement = connection.prepareStatement(query)
         ) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM offsets\n" +
-                    "WHERE (grade = 'completed');");
+            statement.setString(1, String.valueOf(OffsetGrade.COMPLETED));
+            final ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 final Offsets offset = OffsetsMapper.getMapper().apply(resultSet);
                 offsets.add(offset);

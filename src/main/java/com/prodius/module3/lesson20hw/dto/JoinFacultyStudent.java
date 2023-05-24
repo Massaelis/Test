@@ -1,15 +1,13 @@
-package com.prodius.module3.lesson20hw.join;
+package com.prodius.module3.lesson20hw.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class JoinFacultyStudent {
     private final String facultyName;
-
-    public JoinFacultyStudent(String facultyName) {
-        this.facultyName = facultyName;
-    }
 }
