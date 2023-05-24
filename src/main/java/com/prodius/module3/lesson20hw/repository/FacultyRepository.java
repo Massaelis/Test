@@ -1,5 +1,7 @@
 package com.prodius.module3.lesson20hw.repository;
 
+import com.prodius.module3.lesson20hw.join.JoinFacultyCourse;
+import com.prodius.module3.lesson20hw.join.JoinFacultyStudent;
 import com.prodius.module3.lesson20hw.mapper.FacultyMapper;
 import com.prodius.module3.lesson20hw.model.Faculty;
 
@@ -49,11 +51,11 @@ public class FacultyRepository implements Crud<Faculty, String> {
         return faculties;
     }
 
-    public Set<Faculty> getFacultyWithMoreThen(final int studentCount) { // TODO: 20/05/23
-        final Set<Faculty> faculties = new LinkedHashSet<>();
+    public Set<JoinFacultyStudent> getFacultyWithMoreThen(final int studentCount) { // TODO: 20/05/23
+        final Set<JoinFacultyStudent> faculties = new LinkedHashSet<>();
 
         final String query = "SELECT faculty_name FROM faculty\n"
-                + "        join student On faculty.id = student.id_faculty\n"
+                + "        JOIN student On faculty.id = student.id_faculty\n"
                 + "        GROUP BY faculty_name\n"
                 + "        HAVING COUNT (id_faculty) > ?";
 
@@ -64,7 +66,9 @@ public class FacultyRepository implements Crud<Faculty, String> {
             statement.setInt(1, studentCount);
             final ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("faculty_name"));
+                final JoinFacultyStudent faculty = FacultyMapper.getMapperJoinStudent().apply(resultSet);
+                faculties.add(faculty);
+//                System.out.println(resultSet.getString("faculty_name"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,12 +76,12 @@ public class FacultyRepository implements Crud<Faculty, String> {
         return faculties;
     }
 
-    public Set<Object> getFacultyWithCountCourses() { // TODO: 20/05/23
+    public Set<JoinFacultyCourse> getFacultyWithCountCourses() {
         final String query = "SELECT faculty.faculty_name as facultyName, count(course.group_name) as countCourses "
                 + "        FROM course\n"
                 + "        JOIN faculty ON faculty.id = course.id_faculty\n"
                 + "        GROUP BY faculty.faculty_name";
-        final Set<Object> faculties = new LinkedHashSet<>();
+        final Set<JoinFacultyCourse> faculties = new LinkedHashSet<>();
 
         try (
                 final Connection connection = getConnection();
@@ -85,8 +89,10 @@ public class FacultyRepository implements Crud<Faculty, String> {
         ) {
             final ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("facultyName"));
-                System.out.println(resultSet.getString("countCourses"));
+                final JoinFacultyCourse faculty = FacultyMapper.getMapperJoinCourse().apply(resultSet);
+                faculties.add(faculty);
+//                System.out.println(resultSet.getString("facultyName"));
+//                System.out.println(resultSet.getString("countCourses"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
