@@ -34,7 +34,7 @@ public class Main {
 //        facultyController.getFacultyWithCountCourses();
 //        courseController.getDataAboutCourse();
 //        offsetsController.getCompletedOffset();
-        resultsExamController.getHighGrade();
+//        resultsExamController.getHighGrade();
     }
 
     private static FacultyController initFacultyDomain() {
