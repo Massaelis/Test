@@ -8,11 +8,10 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">route</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/student</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/test</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.show_sql">false</property>
 
-        <mapping class="com.prodius.module3.lesson22.model.Customer"/>
-        <mapping class="com.prodius.module3.lesson22.model.Order"/>
+        <mapping class="com.prodius.module3.lesson22hw.module.Student"/>
     </session-factory>
 </hibernate-configuration>

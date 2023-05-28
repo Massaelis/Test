@@ -41,7 +41,7 @@ public class Main {
         final FacultyRepository facultyRepository = new FacultyRepository();
         final FacultyServices facultyServices = new FacultyServices(facultyRepository);
         final FacultyController facultyController = new FacultyController(facultyServices);
-//        facultyController.createFacultyFromFile();
+        facultyController.createFacultyFromFile();
         return facultyController;
     }
 
@@ -49,7 +49,7 @@ public class Main {
         final CourseRepository courseRepository = new CourseRepository();
         final CourseServices courseServices = new CourseServices(courseRepository);
         final CourseController courseController = new CourseController(courseServices);
-//        courseController.createFacultyFromFile();
+        courseController.createFacultyFromFile();
         return courseController;
     }
 
@@ -57,7 +57,7 @@ public class Main {
         final Crud<Student, String> studentRepository = new StudentRepository();
         final StudentServices studentServices = new StudentServices(studentRepository);
         final StudentController studentController = new StudentController(studentServices);
-//        studentController.createFacultyFromFile();
+        studentController.createFacultyFromFile();
         return studentController;
     }
 
@@ -65,7 +65,7 @@ public class Main {
         final OffsetsRepository offsetsRepository = new OffsetsRepository();
         final OffsetsServices offsetsServices = new OffsetsServices(offsetsRepository);
         final OffsetsController offsetsController = new OffsetsController(offsetsServices);
-//        offsetsController.createFacultyFromFile();
+        offsetsController.createFacultyFromFile();
         return offsetsController;
     }
 
@@ -73,7 +73,7 @@ public class Main {
         final ResultsExamRepository resultsExamRepository = new ResultsExamRepository();
         final ResultsExamServices resultsExamServices = new ResultsExamServices(resultsExamRepository);
         final ResultsExamController resultsExamController = new ResultsExamController(resultsExamServices);
-//        resultsExamController.createFacultyFromFile();
+        resultsExamController.createFacultyFromFile();
         return resultsExamController;
     }
 }
