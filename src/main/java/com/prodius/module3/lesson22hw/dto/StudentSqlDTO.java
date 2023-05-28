@@ -10,11 +10,7 @@ import java.math.BigInteger;
 @Setter
 @ToString
 public class StudentSqlDTO {
-    private final String name;
-    private final BigInteger count;
+    private String name;
 
-    public StudentSqlDTO(String name, final long count) {
-        this.name = name;
-        this.count = BigInteger.valueOf(count);
-    }
+    private BigInteger studentcount;
 }

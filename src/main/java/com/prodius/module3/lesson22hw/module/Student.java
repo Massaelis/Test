@@ -3,13 +3,11 @@ package com.prodius.module3.lesson22hw.module;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -27,7 +25,7 @@ public class Student {
     @Column(length = 50)
     private String surname;
 
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(unique = true, length = 100)
     private String email;
