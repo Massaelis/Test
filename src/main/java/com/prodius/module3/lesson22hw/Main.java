@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
         final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        StudentBuilder.students(sessionFactory);
-
+        StudentBuilder studentBuilder = new StudentBuilder();
+        studentBuilder.loadDataFromFile(sessionFactory);
         final Session session = sessionFactory.openSession();
 
         QueryBuilder.query(session);
