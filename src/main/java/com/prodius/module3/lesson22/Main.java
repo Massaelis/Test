@@ -4,13 +4,75 @@ import com.prodius.module3.lesson22.config.HibernateFactoryUtil;
 import com.prodius.module3.lesson22.dto.CountCustomerDTO;
 import com.prodius.module3.lesson22.model.Customer;
 import com.prodius.module3.lesson22.model.Order;
+import com.prodius.module3.lesson22.model.Platform;
+import com.prodius.module3.lesson22.model.Visit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.IntegerType;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
+        final Order order = new Order();
+        order.setService("IOP-456");
+
+        final Visit visit1 = new Visit();
+        final Visit visit2 = new Visit();
+
+        final Platform platform1 = new Platform();
+        final Platform platform2 = new Platform();
+
+        final Customer customer = new Customer();
+        customer.setName("John");
+        customer.setAge(30);
+        customer.setOrder(order);
+        customer.setVisits(Set.of(visit1, visit2));
+        customer.setPlatforms(Set.of(platform1, platform2));
+
+        final EntityManager entityManager = HibernateFactoryUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(customer);
+        entityManager.getTransaction().commit();
+
+        final Customer reference = entityManager.getReference(Customer.class, customer.getId());
+        System.out.println(reference);
+    }
+
+    private void criteriaExamples() {
+        final Customer customer = new Customer();
+        customer.setName("John");
+        customer.setAge(30);
+
+        final EntityManager entityManager = HibernateFactoryUtil.getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(customer);
+        entityManager.getTransaction().commit();
+
+        final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+        final Root<Customer> root = criteriaQuery.from(Customer.class);
+        criteriaQuery.select(root);
+        entityManager.createQuery(criteriaQuery)
+                .getResultList()
+                .forEach(System.out::println);
+
+        final CriteriaBuilder criteriaBuilder2 = entityManager.getCriteriaBuilder();
+        final CriteriaQuery<Customer> criteriaQuery2 = criteriaBuilder2.createQuery(Customer.class);
+        final Root<Customer> root2 = criteriaQuery2.from(Customer.class);
+        criteriaQuery2.select(root2);
+        criteriaQuery2.where(criteriaBuilder2.greaterThan(root2.get("age"), 5));
+        entityManager.createQuery(criteriaQuery2)
+                .getResultList()
+                .forEach(System.out::println);
+    }
+
+    private void simpleExamples() {
         final Order order = new Order();
         order.setService("order");
 
