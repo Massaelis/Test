@@ -11,5 +11,5 @@ import javax.persistence.Entity;
 @Setter
 @ToString
 public class Train extends Transport {
-    public int countWagon;
+    private int countWagon;
 }

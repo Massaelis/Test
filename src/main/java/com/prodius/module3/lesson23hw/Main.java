@@ -6,7 +6,7 @@ import com.prodius.module3.lesson23hw.query.Query;
 public class Main {
     public static void main(String[] args) {
         ModelCreate modelCreate = new ModelCreate();
-        modelCreate.createDatabase();
+        modelCreate.createData();
 
         Query query = new Query();
 

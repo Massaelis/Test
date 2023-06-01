@@ -1,12 +1,13 @@
 package com.prodius.module3.lesson23hw.model;
 
 import com.prodius.module3.lesson23hw.model.modelTransport.Transport;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,16 +15,15 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode
 public class CrewService {
     @Id
     @ToString.Exclude
-    public String id;
+    private String id;
 
-    public String name;
+    private String name;
 
-    public int countCrew;
+    private int countCrew;
 
     @ManyToMany(mappedBy = "crewService")
-    public Set<Transport> transport = new LinkedHashSet<>();
+    private Set<Transport> transport = new LinkedHashSet<>();
 }

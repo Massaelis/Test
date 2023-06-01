@@ -6,13 +6,15 @@ import com.prodius.module3.lesson23hw.model.CrewService;
 import com.prodius.module3.lesson23hw.model.Route;
 import com.prodius.module3.lesson23hw.model.modelTransport.Boat;
 import com.prodius.module3.lesson23hw.model.modelTransport.Train;
+import com.prodius.module3.lesson23hw.model.modelTransport.Transport;
 import com.prodius.module3.lesson23hw.model.modelTransport.Truck;
 
 import javax.persistence.EntityManager;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ModelCreate {
-    public final void createDatabase() {
+    public final void createData() {
         final CrewService crewService = new CrewService();
         crewService.setId("ab18d8c9-7902-449a-8d19-48a84d51478c");
         crewService.setCountCrew(10);
@@ -29,6 +31,8 @@ public class ModelCreate {
         truck.setLoadCapacity(20);
         truck.setMaintenanceCost(1500);
         truck.setCrewService(Set.of(crewService2));
+        final HashSet<Transport> crewService2Transport = new HashSet<>();
+        crewService2Transport.add(truck);
 
         final Train train = new Train();
         train.setCountWagon(5);
@@ -36,7 +40,8 @@ public class ModelCreate {
         train.setLoadCapacity(100);
         train.setMaintenanceCost(1500);
         train.setCrewService(Set.of(crewService));
-
+        final HashSet<Transport> crewServiceTransport = new HashSet<>();
+        crewServiceTransport.add(train);
 
         final Boat boat = new Boat();
         boat.setCountCrew(20);
@@ -44,6 +49,8 @@ public class ModelCreate {
         boat.setLoadCapacity(2000);
         boat.setMaintenanceCost(10000);
         boat.setCrewService(Set.of(crewService, crewService2));
+        crewServiceTransport.add(boat);
+        crewService2Transport.add(boat);
 
         final Route route = new Route();
         route.setId("d75dba63-1980-472e-9d2e-0d3682a09335");
@@ -64,15 +71,18 @@ public class ModelCreate {
         companyMsc.setId("610ee8a1-9070-4e2c-b45e-bf7d7a5739e2");
         companyMsc.setName("MSC");
         companyMsc.setRoute(Set.of(route2, route));
+        route2.setCompany(companyMsc);
+        route.setCompany(companyMsc);
 
         final Company companyUkrFerry = new Company();
         companyUkrFerry.setId("6a2bce0a-e1b7-4378-8241-75e25d941102");
         companyUkrFerry.setName("UkrFerry");
         companyUkrFerry.setRoute(Set.of(route3));
+        route3.setCompany(companyUkrFerry);
 
+        crewService.setTransport(crewServiceTransport);
+        crewService2.setTransport(crewService2Transport);
 
-        route2.setCompany(companyMsc);
-        route.setCompany(companyMsc);
 
         final EntityManager entityManager = HibernateFactoryUtil.getEntityManager();
         entityManager.getTransaction().begin();

@@ -5,7 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,18 +23,12 @@ import java.util.Set;
 public abstract class Transport {
     @Id
     @ToString.Exclude
-    public String id;
+    private String id;
 
-    public int loadCapacity;
+    private int loadCapacity;
 
-    public int maintenanceCost;
+    private int maintenanceCost;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    }, fetch = FetchType.EAGER)
-    @JoinTable(name = "transport_crewService",
-            joinColumns = @JoinColumn(name = "transport_id"),
-            inverseJoinColumns = @JoinColumn(name = "crewService_id"))
-    public Set<CrewService> crewService = new LinkedHashSet<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private Set<CrewService> crewService = new LinkedHashSet<>();
 }

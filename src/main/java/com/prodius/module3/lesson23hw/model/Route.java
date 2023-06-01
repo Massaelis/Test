@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 @Getter
@@ -14,15 +18,13 @@ import javax.persistence.*;
 public class Route {
     @Id
     @ToString.Exclude
-    public String id;
+    private String id;
 
-    public int distance;
+    private int distance;
 
-    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    @JoinColumn(name = "transport_id")
-    public Transport transport;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Transport transport;
 
-    @ManyToOne()
-    @JoinColumn(name = "company_id")
-    public Company company;
+    @ManyToOne
+    private Company company;
 }

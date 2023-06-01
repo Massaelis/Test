@@ -11,5 +11,5 @@ import javax.persistence.Entity;
 @Setter
 @ToString
 public class Boat extends Transport {
-    public int countCrew;
+    private int countCrew;
 }
