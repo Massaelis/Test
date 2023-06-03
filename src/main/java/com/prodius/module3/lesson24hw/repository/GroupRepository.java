@@ -12,18 +12,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class GroupRepository implements Crud<String>{
+public class GroupRepository implements Crud<String,Group>{
 
-    public final MongoDatabase database = MongoUtil.connect("testHW");
+    public static final MongoDatabase database = MongoUtil.connect("testHW");
 
-    private static final String COLLECTION_NAME = "group";
+    public static final String COLLECTION_NAME = "group";
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
     @Override
-    public void create() {
-        final Group group = createGroup(StatusGroup.INACTIVE);
-
+    public void create(Group group) {
         final Document document = new Document();
         document.append("_id", group.getId());
         document.append("count_person", group.getCountPerson());
@@ -72,12 +70,12 @@ public class GroupRepository implements Crud<String>{
         group.deleteOne(filter);
     }
 
-    private Group createGroup(StatusGroup statusGroup){
+    public Group createGroup(final int count, final String name, final String date, final StatusGroup statusGroup){
         final Group group = new Group();
         group.setId(UUID.randomUUID().toString());
-        group.setCountPerson(20);
-        group.setName("Java");
-        group.setStartDate(LocalDate.parse("09/05/2023", formatter));
+        group.setCountPerson(count);
+        group.setName(name);
+        group.setStartDate(LocalDate.parse(date, formatter));
         group.setStatusGroup(String.valueOf(statusGroup));
         return group;
     }
