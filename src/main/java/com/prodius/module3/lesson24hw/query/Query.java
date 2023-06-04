@@ -7,6 +7,8 @@ import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
+import java.time.LocalDate;
+
 import static com.prodius.module3.lesson24hw.repository.GroupRepository.COLLECTION_NAME;
 import static com.prodius.module3.lesson24hw.repository.GroupRepository.database;
 
@@ -23,7 +25,7 @@ public class Query {
         }
     }
 
-    public final void dateStart(String date) {
+    public final void dateStart(LocalDate date) {
         Bson filter3 = Filters.eq("date_start", date);
 
         FindIterable<Document> documents3 = groups.find(filter3);
@@ -33,6 +35,7 @@ public class Query {
             System.out.println(cursor3.next());
         }
     }
+
     public final void nameSearch(String s1, String s2) {
         Bson filter4 = Filters.in("name", s1, s2);
         FindIterable<Document> documents4 = groups.find(filter4);

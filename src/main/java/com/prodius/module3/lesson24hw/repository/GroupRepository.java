@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class GroupRepository implements Crud<String,Group>{
+public class GroupRepository implements Crud<String, Group> {
 
     public static final MongoDatabase database = MongoUtil.connect("testHW");
 
@@ -70,7 +70,7 @@ public class GroupRepository implements Crud<String,Group>{
         group.deleteOne(filter);
     }
 
-    public Group createGroup(final int count, final String name, final String date, final StatusGroup statusGroup){
+    public Group createGroup(final int count, final String name, final String date, final StatusGroup statusGroup) {
         final Group group = new Group();
         group.setId(UUID.randomUUID().toString());
         group.setCountPerson(count);

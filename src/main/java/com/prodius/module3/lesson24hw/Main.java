@@ -5,6 +5,9 @@ import com.prodius.module3.lesson24hw.model.StatusGroup;
 import com.prodius.module3.lesson24hw.query.Query;
 import com.prodius.module3.lesson24hw.repository.GroupRepository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static com.prodius.module3.lesson24hw.repository.GroupRepository.database;
 
 public class Main {
@@ -29,7 +32,8 @@ public class Main {
         query.countPerson(15);
 
         System.out.println("~".repeat(30));
-        query.dateStart("2023-09-05T00:00:00.000Z");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        query.dateStart(LocalDate.parse("09/05/2023", formatter));
 
         System.out.println("~".repeat(30));
         query.nameSearch("C++", "Java");
