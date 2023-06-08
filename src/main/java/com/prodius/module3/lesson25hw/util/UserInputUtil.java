@@ -1,6 +1,7 @@
 package com.prodius.module3.lesson25hw.util;
 
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.BufferedReader;
@@ -22,17 +23,39 @@ public class UserInputUtil {
             if (isNumber) {
                 commandNumber = Integer.parseInt(userInput);
             }
-            switch (commandNumber) {
-                case 0 -> System.out.println("How many? ");
-                case 1 -> System.out.println("Print students: ");
-                case 2 -> System.out.print("Print name students: ");
-                case 3, 4 -> System.out.print("Print id students: ");
-                case 5 -> System.out.println("Finish program ");
-            }
         } while (commandNumber < 0 || commandNumber > menuItems.size());
 
         return commandNumber;
     }
+
+
+    @SneakyThrows
+    public static int getUserInt(final String initialState) {
+        Integer commandNumber = null;
+
+        do {
+            System.out.println(initialState);
+            final String userInput = READER.readLine();
+            final boolean isNumber = NumberUtils.isParsable(userInput);
+            if (isNumber) {
+                commandNumber = Integer.parseInt(userInput);
+            }
+        } while (commandNumber == null);
+
+        return commandNumber;
+    }
+
+    @SneakyThrows
+    public static String getUserString(final String initialState) {
+        do {
+            System.out.println(initialState);
+            final String userInput = READER.readLine();
+            if (StringUtils.isNotBlank(userInput)) {
+                return userInput;
+            }
+        } while (true);
+    }
+
 
     private static void printMenu(final String initialState, final List<String> menuItems) {
         System.out.println(initialState);

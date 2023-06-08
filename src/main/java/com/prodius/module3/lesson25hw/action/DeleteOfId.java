@@ -1,17 +1,14 @@
 package com.prodius.module3.lesson25hw.action;
 
 import com.prodius.module3.lesson25hw.controller.StudentController;
+import com.prodius.module3.lesson25hw.util.UserInputUtil;
 
-public class DeleteOfId implements Command<String> {
+public class DeleteOfId implements Command {
     private final StudentController controller = StudentController.getInstance();
 
     @Override
     public void execute() {
-
-    }
-
-    @Override
-    public void execute(String value) {
+        final String value = UserInputUtil.getUserString("Print id students: ");
         controller.deleteOfId(value);
     }
 }

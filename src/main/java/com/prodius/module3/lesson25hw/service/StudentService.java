@@ -6,7 +6,11 @@ import com.prodius.module3.lesson25hw.repository.StudentRepository;
 import org.bson.types.ObjectId;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StudentService {
@@ -43,13 +47,12 @@ public class StudentService {
     }
 
     private Student created() {
-        final Student student = new Student(
+        return new Student(
                 ObjectId.get(),
                 "Student-" + RANDOM.nextInt(100),
                 LocalDate.now().minusDays(RANDOM.nextInt(1000)).plusDays(RANDOM.nextInt(1000)),
                 createdSetCourse()
         );
-        return student;
     }
 
     public List<Course> createdSetCourse() {
@@ -61,12 +64,11 @@ public class StudentService {
     }
 
     private Course createdCourse() {
-        final Course course = new Course(
+        return new Course(
                 ObjectId.get(),
                 "Course-" + RANDOM.nextInt(100),
                 "Description-" + RANDOM.nextInt(100)
         );
-        return course;
     }
 
     public Set<Student> getAll() {

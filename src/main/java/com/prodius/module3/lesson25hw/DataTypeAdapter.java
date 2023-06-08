@@ -9,29 +9,22 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class DataTypeAdapter extends TypeAdapter<LocalDate> {
-
     @Override
-    public void write(JsonWriter out, LocalDate localDate) throws IOException {
-        out.beginObject()
-                .name("dateOfBirth")
-                .value(localDate.toString())
-                .endObject();
+    public void write(final JsonWriter jsonWriter, final LocalDate localDate) throws IOException {
+        if (localDate == null) {
+            jsonWriter.nullValue();
+        } else {
+            jsonWriter.value(localDate.toString());
+        }
     }
 
     @Override
-    public LocalDate read(final JsonReader in) throws IOException {
-        in.beginObject();
-
-        if (in.hasNext()) {
-            final JsonToken token = in.peek();
-//            System.out.println("Token: " + token);
-            final String name = in.nextName();
-//            System.out.println("Name: " + name);
-            final String value = in.nextString();
-            in.endObject();
-            return LocalDate.parse(value);
+    public LocalDate read(final JsonReader jsonReader) throws IOException {
+        if (jsonReader.peek() == JsonToken.NULL) {
+            jsonReader.nextNull();
+            return null;
+        } else {
+            return LocalDate.parse(jsonReader.nextString());
         }
-        in.endObject();
-        return null;
     }
 }

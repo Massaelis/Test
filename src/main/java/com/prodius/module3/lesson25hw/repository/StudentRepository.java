@@ -1,16 +1,13 @@
 package com.prodius.module3.lesson25hw.repository;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.prodius.module3.lesson25hw.model.Student;
-import com.prodius.module3.lesson25hw.util.MongoUtil;
 import org.bson.Document;
 
 import java.util.Random;
 import java.util.Set;
 
 public class StudentRepository extends AbstractRepository<Student> {
-    protected static final MongoDatabase DATABASE = MongoUtil.connect("university");
     private static final String COLLECTION_NAME = "students";
 
     private static final Random RANDOM = new Random();

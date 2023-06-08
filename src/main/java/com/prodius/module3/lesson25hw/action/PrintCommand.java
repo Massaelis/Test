@@ -9,9 +9,4 @@ public class PrintCommand implements Command {
     public void execute() {
         controller.printAll();
     }
-
-    @Override
-    public void execute(Object value) {
-
-    }
 }

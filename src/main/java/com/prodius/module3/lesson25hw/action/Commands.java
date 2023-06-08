@@ -19,10 +19,6 @@ public enum Commands {
         command.execute();
     }
 
-    public void execute(String value) {
-        command.execute(value);
-    }
-
     @Override
     public String toString() {
         return name;
