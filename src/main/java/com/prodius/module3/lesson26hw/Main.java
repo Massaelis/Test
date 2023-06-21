@@ -1,12 +1,16 @@
 package com.prodius.module3.lesson26hw;
 
-import com.prodius.module3.lesson26hw.controller.UserController;
-import com.prodius.module3.lesson26hw.repository.UserRepository;
-import com.prodius.module3.lesson26hw.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Main {
+
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
+
     public static void main(String[] args) {
-        UserRepository userRepository = new UserRepository();
+        /*UserRepository userRepository = new UserRepository();
         UserService userService = new UserService(userRepository);
         UserController userController = new UserController(userService);
 
@@ -16,6 +20,12 @@ public class Main {
 
         userController.updateNameOfId("111", "jo-jo");
         userController.deleteOfId("222");
-        userController.read();
+        userController.read();*/
+
+        logger.trace("We've just greeted the user!");
+        logger.debug("We've just greeted the user!");
+        logger.info("We've just greeted the user!");
+        logger.warn("We've just greeted the user!");
+        logger.error("We've just greeted the user!");
     }
 }
