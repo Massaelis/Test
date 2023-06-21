@@ -42,7 +42,7 @@ public class Main {
         System.out.println(reference);*/
 
         Flyway flyway = Flyway.configure()
-                .dataSource("jdbc:postgresql://localhost:5432/test", "postgres", "root")
+                .dataSource("jdbc:postgresql://localhost:5432/test", "postgres", "999267")
                 .baselineOnMigrate(true)
                 .locations("db/migration/lesson26")
                 .load();
