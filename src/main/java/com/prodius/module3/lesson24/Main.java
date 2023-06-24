@@ -26,7 +26,7 @@ public class Main {
         read(database);
 
 //        delete(database);
-//        read(database);
+//        getAll(database);
     }
 
     private static void create(final MongoDatabase database) {

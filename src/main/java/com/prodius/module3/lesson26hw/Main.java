@@ -1,18 +1,22 @@
 package com.prodius.module3.lesson26hw;
 
+import com.prodius.module3.lesson26hw.config.FlywayUtil;
+import com.prodius.module3.lesson26hw.config.HibernateFactoryUtil;
 import com.prodius.module3.lesson26hw.controller.UserController;
 import com.prodius.module3.lesson26hw.model.Group;
 import com.prodius.module3.lesson26hw.model.User;
 import com.prodius.module3.lesson26hw.repository.UserRepository;
 import com.prodius.module3.lesson26hw.service.UserService;
-import org.flywaydb.core.Flyway;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class Main {
 
     public static void main(String[] args) {
+        HibernateFactoryUtil.init();
+        FlywayUtil.initMigration();
+
         UserRepository userRepository = new UserRepository();
         UserService userService = new UserService(userRepository);
         UserController userController = new UserController(userService);
@@ -27,19 +31,19 @@ public class Main {
         userController.deleteOfId("222");
         userController.read();
 
-        Flyway flyway = Flyway.configure()
-                .dataSource("jdbc:postgresql://localhost:5432/test2", "postgres", "999267")
-                .baselineOnMigrate(true)
-                .locations("db/migration/lesson26hw")
-                .load();
-        flyway.migrate();
+        final ArrayList<User> users = new ArrayList<>();
+        users.add(user);
+        users.add(user3);
 
-        userController.read();
-
-        Group group = new Group("Java", List.of(user,user3));
-
+        Group group = new Group("Java", users);
         System.out.println(group);
 
-        System.out.println(group.clone());
+        final Group clone = group.clone();
+        System.out.println(clone);
+
+        user.setAge(999);
+        group.getUsers().add(user2);
+        System.out.println(clone);
+
     }
 }

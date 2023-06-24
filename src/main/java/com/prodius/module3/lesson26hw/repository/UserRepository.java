@@ -6,34 +6,43 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class UserRepository implements Crud<User> {
-    public final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-    public final Session session = sessionFactory.openSession();
+    private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
 
     @Override
-    public User save(User user) {
+    public User create(User user) {
         try (final Session session = sessionFactory.openSession()) {
             Transaction t = session.beginTransaction();
             session.save(user);
             t.commit();
-
-            System.out.println("Save: " + user);
         }
         return user;
     }
 
     @Override
-    public void read() {
+    public void update(User user) {
         try (final Session session = sessionFactory.openSession()) {
-            session.createNativeQuery("SELECT * FROM person ORDER BY name", User.class)
-                    .list()
-                    .forEach(System.out::println);
+            Transaction t = session.beginTransaction();
+            session.update(user);
+            t.commit();
         }
     }
+
     @Override
-    public User update(String id) {
-        User user = session.get(User.class, id);
-        return user;
+    public List<User> getAll() {
+        try (final Session session = sessionFactory.openSession()) {
+            return session.createNativeQuery("SELECT * FROM person ORDER BY name", User.class)
+                    .list();
+        }
+    }
+
+    @Override
+    public User getById(String id) {
+        try (final Session session = sessionFactory.openSession()) {
+            return session.get(User.class, id);
+        }
     }
 
     @Override
@@ -42,9 +51,7 @@ public class UserRepository implements Crud<User> {
             Transaction t = session.beginTransaction();
             User s = session.get(User.class, id);
             session.delete(s);
-
             t.commit();
-            System.out.println("Deleted: " + s);
         }
     }
 }

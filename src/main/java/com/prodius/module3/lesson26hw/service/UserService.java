@@ -3,8 +3,6 @@ package com.prodius.module3.lesson26hw.service;
 import com.prodius.module3.lesson26hw.model.TelephoneNumber;
 import com.prodius.module3.lesson26hw.model.User;
 import com.prodius.module3.lesson26hw.repository.UserRepository;
-
-import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,48 +20,33 @@ public class UserService {
     }
 
     public User create(String id) {
-
         logger.info("Logging message: create user with id {}", id);
-        return repository.save(created(id));
+        return repository.create(created(id));
     }
 
     public void read() {
-        repository.read();
-        logger.info("Logging message: read users");
+        repository.getAll();
+        logger.info("Logging message: getAll users");
     }
 
     public void updateNameOfId(String id, String newName) {
-        updateName(id, newName);
-        logger.info("Logging message: update name user with id {}. New name: {}", id, newName);
+        User user = repository.getById(id);
+        user.setName(newName);
+        repository.update(user);
+        logger.info("Logging message: getById name user with id {}. New name: {}", id, newName);
     }
 
     public void updateAgeOfId(String id, Integer newAge) {
-        updateAge(id, newAge);
-        logger.info("Logging message: update age user with id {}. New age: {}", id, newAge);
+        User user = repository.getById(id);
+        user.setAge(newAge);
+        repository.update(user);
+        logger.info("Logging message: getById age user with id {}. New age: {}", id, newAge);
     }
 
 
     public void deleteOfId(String value) {
         repository.deleteOfId(value);
         logger.info("Logging message: delete user with id {}", value);
-    }
-
-    public void updateName(String id, String after) {
-        Transaction transaction = repository.session.beginTransaction();
-        User user = repository.update(id);
-        user.setName(after);
-        repository.session.save(user);
-        transaction.commit();
-        System.out.println("Updated name: " + user);
-    }
-
-    public void updateAge(String id, Integer after) {
-        Transaction transaction = repository.session.beginTransaction();
-        User user = repository.update(id);
-        user.setAge(after);
-        repository.session.save(user);
-        transaction.commit();
-        System.out.println("Updated age: " + user);
     }
 
     private User created(String id) {

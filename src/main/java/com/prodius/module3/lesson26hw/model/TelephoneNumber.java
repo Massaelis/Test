@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class TelephoneNumber {
-    private static final int MAX_NUMBER_LENGTH = 8;
+    private static final int NUMBER_LENGTH = 8;
+
     private final String phoneNumber;
 
     public TelephoneNumber(String phoneNumber) {
@@ -13,11 +14,9 @@ public class TelephoneNumber {
     }
 
     private void validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber == null ||
-                phoneNumber.length() > MAX_NUMBER_LENGTH ||
-                phoneNumber.length() < MAX_NUMBER_LENGTH
-//                ||
-//                phoneNumber.contains("+")
+        if (phoneNumber == null
+                || phoneNumber.length() != NUMBER_LENGTH
+                || !phoneNumber.startsWith("+")
         ) {
             throw new IllegalArgumentException();
         }
