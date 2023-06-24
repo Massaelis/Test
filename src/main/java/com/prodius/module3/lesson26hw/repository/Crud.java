@@ -1,13 +1,13 @@
 package com.prodius.module3.lesson26hw.repository;
 
-public interface Crud<T, O, I> {
-    void create(O object);
+import com.prodius.module3.lesson26hw.model.User;
+
+public interface Crud<O> {
+    User save(O object);
 
     void read();
 
-    void updateNameOfId(T before, T after);
+    User update(String id);
 
-    void updateAgeOfId(T before, I after);
-
-    void deleteOfId(T value);
+    void deleteOfId(String id);
 }

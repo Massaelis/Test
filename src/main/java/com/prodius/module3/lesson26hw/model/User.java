@@ -13,11 +13,21 @@ import javax.persistence.Table;
 @Table(name = "person")
 public class User {
     @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
     private String name;
 
     private int age;
+
+    private String telephoneNumber;
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "id ='" + id
+                + ", name=" + name
+                + ", age=" + age
+                + ", telephoneNumber=" + telephoneNumber
+                + '}';
+    }
 }

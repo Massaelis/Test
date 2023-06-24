@@ -6,19 +6,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class UserRepository implements Crud<String, User, Integer> {
-    final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+public class UserRepository implements Crud<User> {
+    public final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+    public final Session session = sessionFactory.openSession();
 
     @Override
-    public void create(User user) {
+    public User save(User user) {
         try (final Session session = sessionFactory.openSession()) {
             Transaction t = session.beginTransaction();
             session.save(user);
             t.commit();
 
-            System.out.println("Create: " + user);
+            System.out.println("Save: " + user);
         }
+        return user;
     }
+
     @Override
     public void read() {
         try (final Session session = sessionFactory.openSession()) {
@@ -28,34 +31,16 @@ public class UserRepository implements Crud<String, User, Integer> {
         }
     }
     @Override
-    public void updateNameOfId(String before, String after) {
-        try (final Session session = sessionFactory.openSession()) {
-            Transaction t = session.beginTransaction();
-            User s = session.get(User.class, before);
-            s.setName(after);
-            session.save(s);
-
-            t.commit();
-            System.out.println("Updated name: " + s);
-        }
+    public User update(String id) {
+        User user = session.get(User.class, id);
+        return user;
     }
-    @Override
-    public void updateAgeOfId(String before, Integer after) {
-        try (final Session session = sessionFactory.openSession()) {
-            Transaction t = session.beginTransaction();
-            User s = session.get(User.class, before);
-            s.setAge(after);
-            session.save(s);
 
-            t.commit();
-            System.out.println("Updated age: " + s);
-        }
-    }
     @Override
-    public void deleteOfId(String value) {
+    public void deleteOfId(String id) {
         try (final Session session = sessionFactory.openSession()) {
             Transaction t = session.beginTransaction();
-            User s = session.get(User.class, value);
+            User s = session.get(User.class, id);
             session.delete(s);
 
             t.commit();
