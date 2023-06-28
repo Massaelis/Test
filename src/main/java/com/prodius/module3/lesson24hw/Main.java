@@ -26,7 +26,7 @@ public class Main {
         groupRepository.updateOfName("PHP", "C++");
         groupRepository.read();
 //        groupRepository.deleteOfName("C++");
-//        groupRepository.read();
+//        groupRepository.getAll();
 
         System.out.println("~".repeat(30));
         query.countPerson(15);

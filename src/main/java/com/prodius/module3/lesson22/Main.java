@@ -4,8 +4,7 @@ import com.prodius.module3.lesson22.config.HibernateFactoryUtil;
 import com.prodius.module3.lesson22.dto.CountCustomerDTO;
 import com.prodius.module3.lesson22.model.Customer;
 import com.prodius.module3.lesson22.model.Order;
-import com.prodius.module3.lesson22.model.Platform;
-import com.prodius.module3.lesson22.model.Visit;
+import org.flywaydb.core.Flyway;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
@@ -15,11 +14,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        final Order order = new Order();
+        /*final Order order = new Order();
         order.setService("IOP-456");
 
         final Visit visit1 = new Visit();
@@ -41,7 +39,14 @@ public class Main {
         entityManager.getTransaction().commit();
 
         final Customer reference = entityManager.getReference(Customer.class, customer.getId());
-        System.out.println(reference);
+        System.out.println(reference);*/
+
+        Flyway flyway = Flyway.configure()
+                .dataSource("jdbc:postgresql://localhost:5432/test", "postgres", "999267")
+                .baselineOnMigrate(true)
+                .locations("db/migration/lesson26")
+                .load();
+        flyway.migrate();
     }
 
     private void criteriaExamples() {

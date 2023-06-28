@@ -159,7 +159,7 @@ public class Main {
 
         final String updateQuery = "UPDATE \"Students\" SET age = 21 WHERE id = 'de409053-6dfa-48f7-a8af-b0203e58f72f'";
         final int update = statement.executeUpdate(updateQuery);
-        System.out.println("Execute update statement: " + update);
+        System.out.println("Execute getById statement: " + update);
 
         final ResultSet resultSet = statement.executeQuery(query);
         System.out.println(resultSet);
