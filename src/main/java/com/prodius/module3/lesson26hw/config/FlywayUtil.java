@@ -5,7 +5,7 @@ import org.flywaydb.core.Flyway;
 public class FlywayUtil {
     public static void initMigration() {
         Flyway flyway = Flyway.configure()
-                .dataSource("jdbc:postgresql://localhost:5432/test", "postgres", "root")
+                .dataSource("jdbc:postgresql://localhost:5432/test2", "postgres", "999267")
                 .baselineOnMigrate(true)
                 .locations("db/migration/lesson26hw")
                 .load();

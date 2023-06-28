@@ -38,9 +38,16 @@ public class Main {
         Group group = new Group("Java", users);
         System.out.println(group);
 
-        final Group clone = group.clone();
-        System.out.println(clone);
-
+        Group clone = null;
+        try {
+            clone = group.clone();
+            System.out.println("Cloned Object: " + clone + '\n');
+        } catch (CloneNotSupportedException ex) {
+            ex.printStackTrace();
+        }
+//        final Group clone = group.clone();
+//        System.out.println(clone);
+//
         user.setAge(999);
         group.getUsers().add(user2);
         System.out.println(clone);
