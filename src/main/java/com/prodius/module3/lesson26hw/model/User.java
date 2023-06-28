@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "person")
-public class User implements Cloneable{
+public class User implements Cloneable {
     @Id
     private String id;
 
@@ -30,21 +30,9 @@ public class User implements Cloneable{
                 + ", telephoneNumber=" + telephoneNumber
                 + '}';
     }
-    public User(){
 
-    }
-    public User(String id, String name, int age, String telephoneNumber){
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.telephoneNumber = telephoneNumber;
-    }
     @Override
-    public User clone() {
-        try {
-            return (User) super.clone();
-        } catch (CloneNotSupportedException e) {
-            return new User(this.getId(), this.getName(), this.getAge(), this.getTelephoneNumber());
-        }
+    public User clone() throws CloneNotSupportedException {
+        return (User) super.clone();
     }
 }
