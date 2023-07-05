@@ -23,7 +23,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.prodius.module3.lesson26hw" level="INFO" additivity="false">
+    <logger name="com.prodius.module3.module3" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </logger>

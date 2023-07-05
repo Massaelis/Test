@@ -13,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "groups")
+@ToString
 public class Group {
     @Id
     private String name;
