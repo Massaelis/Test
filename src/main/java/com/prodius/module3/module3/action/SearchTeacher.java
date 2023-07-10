@@ -17,13 +17,13 @@ public class SearchTeacher implements Command {
         final String surname = UserInputUtil.getUserString("Print surname teacher: ");
         try (final Session session = sessionFactory.openSession()) {
             session.createNativeQuery("SELECT * FROM teacher\n" +
-                            "    WHERE (name LIKE :name)\n" +
-                            "    OR (surname LIKE :surname)", Teacher.class)
+                            "WHERE (name LIKE :name)\n" +
+                            "OR (surname LIKE :surname)", Teacher.class)
                     .setParameter("name", name)
                     .setParameter("surname", surname)
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search teacher with name {}, surname{} ", name, surname);
+        Commands.logger.info("User search teacher with name {}, surname {} ", name, surname);
     }
 }

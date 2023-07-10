@@ -1,7 +1,58 @@
-19:13:12.639 [main] INFO  c.p.module3.module3.action.Commands - Logging message: Show teacher with name Jo, surnamed 
-19:18:20.133 [main] INFO  c.p.module3.module3.action.Commands - User search group with name sfa
-19:18:24.054 [main] INFO  c.p.module3.module3.action.Commands - User search count students
-19:18:28.200 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
-19:18:34.833 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name Jo, surnamef 
-19:19:00.776 [main] INFO  c.p.module3.module3.action.Commands - User search student with name 9
-19:19:54.232 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+19:39:04.720 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+19:39:10.996 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+19:39:15.260 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name f, surnamef 
+19:39:18.702 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 9
+19:39:22.258 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+20:46:47.658 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+20:47:48.146 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+20:47:49.746 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+20:47:54.593 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name r, surnamer 
+20:47:55.789 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+20:48:03.650 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 8
+20:49:53.931 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+20:49:55.069 [main] INFO  c.p.module3.module3.action.Commands - User search max class grade
+20:51:23.719 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+20:52:11.195 [main] INFO  c.p.module3.module3.action.Commands - User search group with name afternoon_131
+20:52:26.187 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+20:54:33.909 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 0
+20:55:49.110 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+20:55:54.964 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+20:55:59.378 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name 3, surname3 
+20:56:09.784 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+20:56:12.337 [main] INFO  c.p.module3.module3.action.Commands - User search max class grade
+20:56:16.260 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 7
+20:56:18.726 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+21:01:14.362 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+21:01:15.338 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+21:01:21.756 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name jo, surname Jo 
+21:01:28.755 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+21:01:30.066 [main] INFO  c.p.module3.module3.action.Commands - User search max class grade
+21:01:34.023 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 9
+21:06:30.734 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+21:06:31.400 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+21:06:32.658 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+21:06:33.718 [main] INFO  c.p.module3.module3.action.Commands - User search max class grade
+21:06:35.091 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 6
+21:06:42.113 [main] INFO  c.p.module3.module3.action.Commands - User search group with name 11
+21:06:46.760 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+21:07:19.021 [main] INFO  c.p.module3.module3.action.Commands - User search group with name day_111
+21:08:53.044 [main] INFO  c.p.module3.module3.action.Commands - User search group with name day-111
+21:09:28.529 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+21:09:34.626 [main] INFO  c.p.module3.module3.action.Commands - User search group with name morning_122
+21:10:13.631 [main] INFO  c.p.module3.module3.action.Commands - User search group with name day_111
+21:10:29.486 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+21:12:13.985 [main] INFO  c.p.module3.module3.action.Commands - User search group with name day_111
+21:12:26.366 [main] INFO  c.p.module3.module3.action.Commands - User search group with name day_111
+21:21:43.899 [main] INFO  c.p.module3.module3.action.Commands - User search group with name 111
+21:22:07.062 [main] INFO  c.p.module3.module3.action.Commands - User search group with name 1
+21:22:16.949 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+21:23:04.185 [main] INFO  c.p.module3.module3.action.Commands - User search group with name 2
+21:23:07.246 [main] INFO  c.p.module3.module3.action.Commands - User search count students
+21:23:09.087 [main] INFO  c.p.module3.module3.action.Commands - User search middle group grade
+21:23:26.169 [main] INFO  c.p.module3.module3.action.Commands - User search teacher with name Jo, surname d 
+21:23:30.378 [main] INFO  c.p.module3.module3.action.Commands - User search min class grade
+21:23:31.354 [main] INFO  c.p.module3.module3.action.Commands - User search max class grade
+21:23:33.613 [main] INFO  c.p.module3.module3.action.Commands - User search student with grade 6
+21:23:35.205 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+21:23:46.086 [main] INFO  c.p.module3.module3.action.Commands - User leave program
+21:30:47.843 [main] INFO  c.p.module3.module3.action.Commands - User leave program

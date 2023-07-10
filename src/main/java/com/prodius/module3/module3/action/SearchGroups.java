@@ -15,7 +15,7 @@ public class SearchGroups implements Command {
         try (final Session session = sessionFactory.openSession()) {
             session.createNativeQuery("SELECT name FROM groups\n" +
                             "WHERE name LIKE :name", Group.class)
-                    .setParameter("name", name)
+                    .setParameter("name", "%" + name + "%")
                     .getResultList()
                     .forEach(System.out::println);
         }

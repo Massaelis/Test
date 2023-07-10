@@ -33,12 +33,5 @@ public class Main {
             final int userChoice = UserInputUtil.getUserChoice("What you want to do?", menuItems);
             values[userChoice].execute();
         }
-
-        //Предмет із найгіршою та найкращою успішністю !!!!!!!!!!!!!!!!!!!!
-
-//        SELECT clazz.name, AVG(grade ) as middle_grade
-//          FROM clazz
-//        join grade ON grade.clazz_name = clazz.name
-//        GROUP BY name
     }
 }

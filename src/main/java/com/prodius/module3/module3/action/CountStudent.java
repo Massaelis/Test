@@ -13,7 +13,7 @@ public class CountStudent implements Command {
     public void execute() {
         try (final Session session = sessionFactory.openSession()) {
             session.createNativeQuery("SELECT\n" +
-                            " groups_name as name,\n" +
+                            "groups_name AS name,\n" +
                             "count(surname) AS student_count\n" +
                             "FROM student\n" +
                             "INNER JOIN groups ON groups.name = student.groups_name\n" +

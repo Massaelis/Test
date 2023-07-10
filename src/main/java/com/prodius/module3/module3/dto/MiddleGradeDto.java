@@ -5,10 +5,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+
 @Getter
 @Setter
 @ToString
-public class MiddleStudentGradeDto {
+public class MiddleGradeDto {
     private String name;
     private BigDecimal middle_grade;
 }

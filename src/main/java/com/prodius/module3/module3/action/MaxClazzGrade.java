@@ -6,22 +6,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 
-public class MiddleGroupsGrade implements Command {
+public class MaxClazzGrade implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
 
     @Override
     public void execute() {
         try (final Session session = sessionFactory.openSession()) {
-            session.createNativeQuery("SELECT groups.name,\n" +
-                            "AVG(grade) AS middle_grade\n" +
-                            "FROM groups\n" +
-                            "INNER JOIN student ON groups.name = student.groups_name\n" +
-                            "INNER JOIN grade ON grade.student_surname = student.surname\n" +
-                            "GROUP BY groups.name")
+            session.createNativeQuery("SELECT clazz.name, AVG(grade ) AS middle_grade\n" +
+                            "FROM clazz\n" +
+                            "JOIN grade ON grade.clazz_name = clazz.name\n" +
+                            "GROUP BY name\n" +
+                            "ORDER BY middle_grade desc \n" +
+                            "LIMIT 1")
                     .setResultTransformer(Transformers.aliasToBean(MiddleGradeDto.class))
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search middle group grade");
+        Commands.logger.info("User search max class grade");
     }
 }
