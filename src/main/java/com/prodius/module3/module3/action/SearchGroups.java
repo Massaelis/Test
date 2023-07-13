@@ -5,9 +5,12 @@ import com.prodius.module3.module3.config.UserInputUtil;
 import com.prodius.module3.module3.model.Group;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SearchGroups implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+    private static final Logger logger = LoggerFactory.getLogger(SearchGroups.class);
 
     @Override
     public void execute() {
@@ -19,7 +22,7 @@ public class SearchGroups implements Command {
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search group with name {}", name);
+        logger.info("User search group with name {}", name);
     }
 
 }

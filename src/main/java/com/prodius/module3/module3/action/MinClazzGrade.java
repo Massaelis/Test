@@ -5,9 +5,12 @@ import com.prodius.module3.module3.dto.MiddleGradeDto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MinClazzGrade implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+    private static final Logger logger = LoggerFactory.getLogger(MinClazzGrade.class);
 
     @Override
     public void execute() {
@@ -22,6 +25,6 @@ public class MinClazzGrade implements Command {
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search min class grade");
+        logger.info("User search min class grade");
     }
 }

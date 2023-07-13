@@ -6,10 +6,13 @@ import com.prodius.module3.module3.config.UserInputUtil;
 import com.prodius.module3.module3.model.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class SearchTeacher implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+    private static final Logger logger = LoggerFactory.getLogger(SearchTeacher.class);
 
     @Override
     public void execute() {
@@ -24,6 +27,6 @@ public class SearchTeacher implements Command {
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search teacher with name {}, surname {} ", name, surname);
+        logger.info("User search teacher with name {}, surname {} ", name, surname);
     }
 }

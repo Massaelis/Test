@@ -6,9 +6,12 @@ import com.prodius.module3.module3.dto.MiddleGradeDto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MiddleStudentGrade implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+    private static final Logger logger = LoggerFactory.getLogger(SessionFactory.class);
 
     @Override
     public void execute() {
@@ -26,6 +29,6 @@ public class MiddleStudentGrade implements Command {
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search student with grade {}", grade);
+        logger.info("User search student with grade {}", grade);
     }
 }

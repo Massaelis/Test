@@ -5,9 +5,13 @@ import com.prodius.module3.module3.dto.CountStudentDto;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CountStudent implements Command {
     private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+
+    private static final Logger logger = LoggerFactory.getLogger(CountStudent.class);
 
     @Override
     public void execute() {
@@ -22,6 +26,6 @@ public class CountStudent implements Command {
                     .getResultList()
                     .forEach(System.out::println);
         }
-        Commands.logger.info("User search count students");
+        logger.info("User search count students");
     }
 }
