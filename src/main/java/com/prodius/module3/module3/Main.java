@@ -2,13 +2,9 @@ package com.prodius.module3.module3;
 
 
 import com.prodius.module3.module3.action.Commands;
-import com.prodius.module3.module3.action.SearchTeacher;
 import com.prodius.module3.module3.config.FlywayUtil;
 import com.prodius.module3.module3.config.HibernateFactoryUtil;
 import com.prodius.module3.module3.config.UserInputUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,11 +17,8 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction t = session.beginTransaction();
-        t.commit();
-
+        // for init tables with create mode
+        HibernateFactoryUtil.getSessionFactory();
         FlywayUtil.initMigration();
 
         final Commands[] values = Commands.values();

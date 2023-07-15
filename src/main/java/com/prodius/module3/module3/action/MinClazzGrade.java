@@ -1,15 +1,12 @@
 package com.prodius.module3.module3.action;
 
-import com.prodius.module3.module3.config.HibernateFactoryUtil;
 import com.prodius.module3.module3.dto.MiddleGradeDto;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MinClazzGrade implements Command {
-    private final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
     private static final Logger logger = LoggerFactory.getLogger(MinClazzGrade.class);
 
     @Override

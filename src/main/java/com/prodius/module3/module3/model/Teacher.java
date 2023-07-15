@@ -18,6 +18,7 @@ public class Teacher {
     private TeacherKey teacherKey;
 
     private int age;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Clazz clazz;
 }
