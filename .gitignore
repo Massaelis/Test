@@ -13,3 +13,4 @@ target/
 note.txt
 
 *.log
+tests-*.gz
