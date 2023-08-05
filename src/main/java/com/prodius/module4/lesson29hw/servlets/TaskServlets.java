@@ -65,6 +65,7 @@ public class TaskServlets extends HttpServlet {
 
         // опять запихиваем объект bot в атрибут и возвращаемся на страницу /bot.jsp, где наблюдаем изменения
         request.setAttribute("task", task);
-        request.getRequestDispatcher("/task.jsp").forward(request, response);
+//        request.getRequestDispatcher("/task.jsp").forward(request, response);
+        System.out.println("123");
     }
 }

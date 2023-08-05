@@ -8,7 +8,7 @@
 <body>
 <!--<a href="https://shorturl.at/tKMZ8"> <img src="img.png" alt=""></a>-->
 <h1>Welcome to task maker</h1>
-<a href="task.jsp">Create task</a>
+<a href="${pageContext.request.contextPath}/create">Create task</a>
 <p><a href="TaskServlets">Show task</a></p>
 </body>
 </html>

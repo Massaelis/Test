@@ -5,8 +5,8 @@
 </head>
 <body>
 <section>
-    <jsp:useBean id="task" scope="request" type="model/Task"/>
-    <form method="post" action="task?action=submit">
+    <jsp:useBean id="task" scope="request" type="com.prodius.module4.lesson29hw.model.Task"/>
+    <form method="post" action="${pageContext.request.contextPath}/task?action=submit">
         <dl>
             <dt>Name: </dt>
             <dd><input type="text" name="name" value="${task.name}" placeholder="${task.name}" /></dd>
