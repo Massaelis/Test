@@ -2,31 +2,55 @@ package com.prodius.module4.lesson28hw.CoreThreads;
 
 import lombok.SneakyThrows;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Main {
-    static Set<Integer> list = new HashSet<>();
+    static List<Integer> integerList = new ArrayList<>();
+    static List<Thread> threads = new ArrayList<>();
+    static List<Thread> threadsForSum = new ArrayList<>();
 
-    static final CommonResource commonResource = new CommonResource();
     @SneakyThrows
     public static void main(String[] args) {
         myThread(10);
 
-        System.out.println(list);
-        System.out.println(list.size());
-        System.out.println(commonResource.get());
+        threads.forEach(thread1 -> {
+            try {
+                thread1.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-        final Thread myThreadSum = new Thread(new MyThreadForSum(list));
+        final Thread myThreadSum = new Thread(new MyThreadForSumPoint(integerList));
         myThreadSum.start();
         myThreadSum.join();
+
+        myThreadForSum(4);
+
+        threadsForSum.forEach(thread1 -> {
+            try {
+                thread1.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        System.out.println("All sum: " + MyThreadForSum.threadSum);
     }
 
     private static void myThread(int thread) throws InterruptedException {
         for (int i = 1; i <= thread; i++) {
-            Thread myThreads = new Thread(new MyThread(list, commonResource));
+            Thread myThreads = new Thread(new MyThread(integerList));
+            threads.add(myThreads);
             myThreads.start();
-            myThreads.join();
+        }
+    }
+
+    private static void myThreadForSum(int thread) throws InterruptedException {
+        for (int i = 1; i <= thread; i++) {
+            Thread myThreads = new Thread(new MyThreadForSum(integerList));
+            threadsForSum.add(myThreads);
+            myThreads.start();
         }
     }
 }
