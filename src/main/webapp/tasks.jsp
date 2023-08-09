@@ -7,10 +7,7 @@
 <body>
 <section>
     <h3>Task info</h3>
-    <jsp:useBean id="task" scope="request" class="com/prodius/module4/lesson29hw/model/Task.java"/>
-    <tr>
-        <td> Name: ${task.name} </td>
-        <td><a href="task?action=update">Update</a></td>
-    </tr>
+    <%--    show all tasks--%>
 </section>
+</body>
 </html>

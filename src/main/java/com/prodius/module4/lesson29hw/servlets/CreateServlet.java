@@ -17,4 +17,10 @@ public class CreateServlet extends HttpServlet {
         req.setAttribute("task", task);
         req.getRequestDispatcher("/update.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+        // TODO: 09/08/23 create a new task for user
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+    }
 }
