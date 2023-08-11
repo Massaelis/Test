@@ -8,9 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "CreateServlet", value = "/create")
 public class CreateServlet extends HttpServlet {
+
+    final static List<String> NAMES = new ArrayList<>();
+
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         final Task task = new Task("");
@@ -20,7 +25,8 @@ public class CreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: 09/08/23 create a new task for user
+        String name = req.getParameter("name");
+        NAMES.add(name);
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

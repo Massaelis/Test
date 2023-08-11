@@ -6,6 +6,7 @@
 <body>
 <section>
     <jsp:useBean id="task" scope="request" type="com.prodius.module4.lesson29hw.model.Task"/>
+    <h1>Write task</h1>
     <form method="post" action="${pageContext.request.contextPath}/create">
         <dl>
             <dt>Name: </dt>

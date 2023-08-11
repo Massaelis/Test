@@ -12,7 +12,11 @@ import java.io.IOException;
 public class ShowServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: 09/08/23 get task for current user and add them to req
+        req.setAttribute("names", CreateServlet.NAMES);
         req.getRequestDispatcher("/tasks.jsp").forward(req, resp);
+    }
+    @Override
+    protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
