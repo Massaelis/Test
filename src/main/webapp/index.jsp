@@ -9,6 +9,6 @@
 <h1>Welcome to task maker</h1>
 <p><a href="${pageContext.request.contextPath}/create">Create task</a></p>
 <p><a href="${pageContext.request.contextPath}/show">Show task</a></p>
-<p><a href="">Show full user info</a></p>
+<p><a href="${pageContext.request.contextPath}/info">Show full user info</a></p>
 </body>
 </html>
