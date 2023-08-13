@@ -12,7 +12,6 @@ import java.io.IOException;
 public class ShowInfo extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        req.getHeader("User-Agent");
         req.getRequestDispatcher("/info.jsp").forward(req, resp);
     }
     @Override
