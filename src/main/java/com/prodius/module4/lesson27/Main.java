@@ -26,7 +26,7 @@ public class Main {
         System.out.println(list.get(0));
         System.out.println(commonResource.get());
 
-        myThread31.start();
+//        myThread31.start();
     }
 
     @SneakyThrows
