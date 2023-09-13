@@ -7,17 +7,18 @@ import java.util.Random;
 @Getter
 public class MyThreadForSchema extends Thread {
     private final Random random = new Random();
-    private static int schemas;
+
+    private int schemas;
 
     @Override
     public void run() {
-        while (schemas < 101) {
-            int point = random.nextInt(25, 35);
-            int brokeProcent = random.nextInt(0, 100);
-            if (brokeProcent > 30) {
-                schemas = schemas + point;
-                System.out.println(Thread.currentThread().getName());
-                System.out.println("schemas = " + schemas);
+        while (schemas < 100) {
+            int brokePercent = random.nextInt(0, 100);
+            if (brokePercent > 30) {
+                schemas += random.nextInt(25, 35);
+                System.out.println(Thread.currentThread().getName() + " schemas = " + schemas);
+            } else {
+                schemas = 0;
             }
             try {
                 Thread.sleep(1000);

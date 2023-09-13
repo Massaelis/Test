@@ -9,24 +9,16 @@ import java.util.Random;
 public class MyThreadsForDetails extends Thread {
     private static final Object MONITOR = new Object();
     private final Random random = new Random();
-    private static int iterationsCount = 0;
-    public static int details;
 
-    public MyThreadsForDetails(final int detail) {
-        details = detail;
-    }
+    private static int details = 0;
 
     @SneakyThrows
     @Override
     public void run() {
-        while (details < 101) {
+        while (details < 100) {
             synchronized (MONITOR) {
-                int point = random.nextInt(10, 20);
-                details = details + point;
-                System.out.println(Thread.currentThread().getName());
-                System.out.println("Basic details = " + details);
-                iterationsCount++;
-//                System.out.println("iterationsCount = " + iterationsCount);
+                details += random.nextInt(10, 20);
+                System.out.println(Thread.currentThread().getName() + " Basic details = " + details);
                 try {
                     Thread.sleep(2 * 1000);
                 } catch (InterruptedException e) {
