@@ -9,20 +9,19 @@ public class HibernateFactoryUtil {
     private static SessionFactory sessionFactory;
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public static void init() {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure("/module4/config.xml")
-                .build();
-        try {
-            sessionFactory = new MetadataSources(registry)
-                    .buildMetadata()
-                    .buildSessionFactory();
-        } catch (Exception e) {
-            StandardServiceRegistryBuilder.destroy(registry);
-            throw e;
+        if (sessionFactory == null) {
+            final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                    .configure("/module4/config.xml")
+                    .build();
+            try {
+                sessionFactory = new MetadataSources(registry)
+                        .buildMetadata()
+                        .buildSessionFactory();
+            } catch (Exception e) {
+                StandardServiceRegistryBuilder.destroy(registry);
+                throw e;
+            }
         }
+        return sessionFactory;
     }
 }

@@ -10,6 +10,12 @@ public class MyThreadForSchema extends Thread {
 
     private int schemas;
 
+    private static int brokeSchemas;
+
+    public static int getBrokeSchemas() {
+        return brokeSchemas;
+    }
+
     @Override
     public void run() {
         while (schemas < 100) {
@@ -19,6 +25,7 @@ public class MyThreadForSchema extends Thread {
                 System.out.println(Thread.currentThread().getName() + " schemas = " + schemas);
             } else {
                 schemas = 0;
+                brokeSchemas++;
             }
             try {
                 Thread.sleep(1000);

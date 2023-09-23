@@ -1,12 +1,21 @@
 package com.prodius.module4.module4.threads;
 
+import com.prodius.module4.module4.model.Details;
 import com.prodius.module4.module4.model.FuelTruck;
 
+import java.time.LocalDate;
+
 public class MyThreadStarter {
+    final FuelTruck fuelTruck = new FuelTruck();
+    long timeWork;
+
     public void start() throws InterruptedException {
-        final FuelTruck fuelTruck = new FuelTruck();
+
         final Thread robot1 = new MyThreadForFuel(fuelTruck);
         robot1.setDaemon(true);
+
+        long time = System.currentTimeMillis();
+
         robot1.start();
 
         final Thread robot2 = new MyThreadsForDetails();
@@ -22,5 +31,21 @@ public class MyThreadStarter {
 
         final Thread robot5 = new MyThreadsForRobot5(fuelTruck);
         robot5.start();
+        robot5.join();
+
+        timeWork = (System.currentTimeMillis() - time) / 1000;
+        System.out.println("Time in seconds " + timeWork);
+    }
+
+    public Details createDetails() {
+        Details details = new Details();
+
+        details.setDate(LocalDate.now());
+        details.setTime(timeWork);
+        details.setFuel(fuelTruck.getUsedFuel());
+        details.setBrokeSchemas(MyThreadForSchema.getBrokeSchemas());
+
+        System.out.println(details);
+        return details;
     }
 }

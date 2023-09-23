@@ -1,15 +1,27 @@
 package com.prodius.module4.module4.model;
 
-public class FuelTruck {
-    public void addFuel(final int count) {
+import lombok.Getter;
 
+import java.util.Random;
+
+public class FuelTruck {
+    private final Random random = new Random();
+    private int fuel;
+    @Getter
+    private int usedFuel;
+
+    public void addFuel(final int count) {
+        fuel = fuel + count;
     }
 
     public int getInfo() {
-        return 0;
+        return fuel;
     }
 
     public int getFuel() {
-        return 0;
+        int fuels = random.nextInt(350, 700);
+        fuel = fuel - fuels;
+        usedFuel = usedFuel + fuels;
+        return fuel;
     }
 }

@@ -15,23 +15,16 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class Details {
-    ///stats/{id} - відображає інформацію про конкретну деталь:
-
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    //дата проведення
     private LocalDate date;
 
-    //кількість витраченого часу (секунди)
     private long time;
-//    unixTime = System.currentTimeMillis() / 1000L
 
-    //кількість видобутого палива
     private int fuel;
 
-    //кількість зламаних мікросхем
     private int brokeSchemas;
 }
