@@ -5,10 +5,7 @@
 	</head>
     <body>
         <form method="post" action="${pageContext.request.contextPath}/start">
-            <ul>
-
-            </ul>
-        <button type="submit">Main page</button>
+            <button type="submit">Start fabric</button>
         </form>
     </body>
 </html>
