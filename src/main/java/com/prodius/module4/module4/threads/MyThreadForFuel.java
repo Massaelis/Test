@@ -12,13 +12,19 @@ public class MyThreadForFuel extends Thread {
 
     private final FuelTruck fuelTruck;
 
+    private boolean isCanceled = false;
+
     MyThreadForFuel(final FuelTruck fuelTruck) {
         this.fuelTruck = fuelTruck;
     }
 
+    public void cansel() {
+        isCanceled = true;
+    }
+
     @Override
     public void run() {
-        while (true) {
+        while (!isCanceled) {
             fuelTruck.addFuel(random.nextInt(500, 1000));
             System.out.println(Thread.currentThread().getName() + " Fuels = " + fuelTruck.getInfo() + " l");
             try {

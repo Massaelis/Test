@@ -9,6 +9,6 @@
 <h1>Main page fabric</h1>
 <p><a href="${pageContext.request.contextPath}/stats">stats</a></p>
 <p><a href="${pageContext.request.contextPath}/stats-id">stats/id</a></p>
-<p><a href="${pageContext.request.contextPath}/start">start</a></p>
+<p><a href="${pageContext.request.contextPath}/start.jsp">start</a></p>
 </body>
 </html>

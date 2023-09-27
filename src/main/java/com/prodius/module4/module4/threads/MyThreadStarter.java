@@ -1,21 +1,21 @@
 package com.prodius.module4.module4.threads;
 
+import com.prodius.module4.module4.config.HibernateFactoryUtil;
 import com.prodius.module4.module4.model.Details;
 import com.prodius.module4.module4.model.FuelTruck;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.time.LocalDate;
 
 public class MyThreadStarter {
-    final FuelTruck fuelTruck = new FuelTruck();
-    long timeWork;
 
     public void start() throws InterruptedException {
-
-        final Thread robot1 = new MyThreadForFuel(fuelTruck);
+        final FuelTruck fuelTruck = new FuelTruck();
+        final MyThreadForFuel robot1 = new MyThreadForFuel(fuelTruck);
         robot1.setDaemon(true);
 
         long time = System.currentTimeMillis();
-
         robot1.start();
 
         final Thread robot2 = new MyThreadsForDetails();
@@ -32,13 +32,16 @@ public class MyThreadStarter {
         final Thread robot5 = new MyThreadsForRobot5(fuelTruck);
         robot5.start();
         robot5.join();
+        robot1.cansel();
 
-        timeWork = (System.currentTimeMillis() - time) / 1000;
+        final long timeWork = (System.currentTimeMillis() - time) / 1000;
         System.out.println("Time in seconds " + timeWork);
+
+        createAndSaveDetails(timeWork, fuelTruck);
     }
 
-    public Details createDetails() {
-        Details details = new Details();
+    private void createAndSaveDetails(final long timeWork, final FuelTruck fuelTruck) {
+        final Details details = new Details();
 
         details.setDate(LocalDate.now());
         details.setTime(timeWork);
@@ -46,6 +49,15 @@ public class MyThreadStarter {
         details.setBrokeSchemas(MyThreadForSchema.getBrokeSchemas());
 
         System.out.println(details);
-        return details;
+        save(details);
+    }
+
+    private void save(final Details details) {
+        final SessionFactory sessionFactory = HibernateFactoryUtil.getSessionFactory();
+        final Session session1 = sessionFactory.openSession();
+        session1.beginTransaction();
+        session1.save(details);
+        session1.getTransaction().commit();
+        session1.close();
     }
 }

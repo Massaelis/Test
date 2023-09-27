@@ -6,12 +6,18 @@ import java.util.Random;
 
 public class FuelTruck {
     private final Random random = new Random();
+
+    private final Object monitor = new Object();
+
     private int fuel;
+
     @Getter
     private int usedFuel;
 
     public void addFuel(final int count) {
-        fuel = fuel + count;
+        synchronized (monitor) {
+            fuel = fuel + count;
+        }
     }
 
     public int getInfo() {
@@ -19,9 +25,11 @@ public class FuelTruck {
     }
 
     public int getFuel() {
-        int fuels = random.nextInt(350, 700);
-        fuel = fuel - fuels;
-        usedFuel = usedFuel + fuels;
+        synchronized (monitor) {
+            int fuels = random.nextInt(350, 700);
+            fuel = fuel - fuels;
+            usedFuel = usedFuel + fuels;
+        }
         return fuel;
     }
 }
